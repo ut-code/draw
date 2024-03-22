@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { Box, Flex, chakra, Icon, Link, Spacer } from "@chakra-ui/react";
 import { RiQuestionFill, RiGithubFill } from "react-icons/ri";
 import { Logo } from "../components/Logo";
-import { HelpDialog } from "../components/HelpDialog";
 import { DrawWorkspace } from "../components/Draw";
+import { TutorialDialog } from "../components/TutorialDialog";
 
 export default function App(): JSX.Element {
   const [isTutorialDialogOpenedByUser, setIsTutorialDialogOpenedByUser] =
-    useState(false);
+    useState(true);
   const [isHelpDialogVisible, setIsHelpDialogVisible] = useState(true);
 
   return (
@@ -29,29 +29,16 @@ export default function App(): JSX.Element {
           <Spacer />
 
           <Box display="flex" alignItems="stretch">
-            {/* {!isRoot && (
-              <chakra.button
-                px={4}
-                type="button"
-                transition="color 0.2s"
-                _hover={{ color: "blue.300" }}
-                onClick={() => {
-                  setIsTutorialDialogOpenedByUser(true);
-                }}
-              >
-                ヒント
-              </chakra.button>
-            )} */}
             <chakra.button
-              px={2}
+              px={4}
               type="button"
               transition="color 0.2s"
               _hover={{ color: "blue.300" }}
               onClick={() => {
-                setIsHelpDialogVisible(true);
+                setIsTutorialDialogOpenedByUser(true);
               }}
             >
-              <Icon w={6} h={6} as={RiQuestionFill} />
+              チュートリアル
             </chakra.button>
             <Link
               display="flex"
@@ -68,39 +55,25 @@ export default function App(): JSX.Element {
           </Box>
         </Flex>
         <Box position="relative" flexGrow={1}>
-            <Box
-              position="absolute"
-              top={0}
-              left={0}
-              width="100%"
-              height="100%"
-              backgroundColor="white"
-            >
-              <DrawWorkspace />
-            </Box>
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            width="100%"
+            height="100%"
+            backgroundColor="white"
+          >
+            <DrawWorkspace />
+          </Box>
         </Box>
       </Flex>
-      <HelpDialog
-        onClose={() => {
-          setIsHelpDialogVisible(false);
-        }}
-        visible={isHelpDialogVisible}
-      />
-      {/* {currentRoute &&
-        (isTutorialDialogOpenedByUser ||
-          !tutorialFinishedRoutePathSet.has(currentRoute.path)) && (
-          <TutorialDialog
-            isFirstView={!tutorialFinishedRoutePathSet.has(currentRoute.path)}
-            onClose={() => {
-              setIsTutorialDialogOpenedByUser(false);
-              setTutorialFinishedRoutePathSet(
-                new Set(tutorialFinishedRoutePathSet).add(currentRoute.path)
-              );
-            }}
-            title={currentRoute.label}
-            steps={currentRoute.tutorialSteps}
-          />
-        )} */}
+      {isTutorialDialogOpenedByUser && (
+        <TutorialDialog
+          onClose={() => {
+            setIsTutorialDialogOpenedByUser(false);
+          }}
+        />
+      )}
     </>
   );
 }
