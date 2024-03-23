@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { Stack, Grid } from "@chakra-ui/react";
+import { Stack, Grid, Button } from "@chakra-ui/react";
 import { useGetSet } from "react-use";
 import p5Types from "p5";
 import {
@@ -87,6 +87,16 @@ export function DrawWorkspace(): JSX.Element {
       currentY: 0,
     };
   }
+
+  const save = () => {
+    const canvas = document.getElementById(
+      "defaultCanvas0"
+    ) as HTMLCanvasElement;
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/jpeg");
+    link.download = "download.png";
+    link.click();
+  };
 
   // interpreter に渡す関数は実行開始時に決定されるため、通常の state だと最新の情報が参照できません
   // このため、反則ですが内部的に ref を用いて状態管理をしている react-use の [useGetSet](https://github.com/streamich/react-use/blob/master/docs/useGetSet.md) を用いています。
@@ -188,6 +198,7 @@ export function DrawWorkspace(): JSX.Element {
           draw={getState().draw}
           windowResized={windowResized}
         />
+        <Button onClick={() => save()}>保存</Button>
       </Stack>
     </Grid>
   );
