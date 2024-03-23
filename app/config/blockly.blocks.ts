@@ -18,7 +18,7 @@ Blockly.Blocks[CUSTOM_COMMON_IF] = {
     this.appendValueInput(CUSTOM_COMMON_FIELD_EXPRESSION).setCheck("Boolean");
     this.appendDummyInput().appendField("ならば");
     this.appendStatementInput(CUSTOM_COMMON_FIELD_TRUE_STATEMENTS).setCheck(
-      null
+      null,
     );
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -32,7 +32,7 @@ javascriptGenerator[CUSTOM_COMMON_IF] = (block) => {
     "false";
   const trueStatements = javascriptGenerator.statementToCode(
     block,
-    CUSTOM_COMMON_FIELD_TRUE_STATEMENTS
+    CUSTOM_COMMON_FIELD_TRUE_STATEMENTS,
   );
   return `if(${expression}){${trueStatements}}`;
 };
@@ -44,17 +44,17 @@ Blockly.Blocks[CUSTOM_COMMON_IF_ELSE] = {
     this.appendValueInput(CUSTOM_COMMON_FIELD_EXPRESSION).setCheck(null);
     this.appendDummyInput().appendField("ならば");
     this.appendStatementInput(CUSTOM_COMMON_FIELD_TRUE_STATEMENTS).setCheck(
-      null
+      null,
     );
     this.appendDummyInput().appendField("違えば");
     this.appendStatementInput(CUSTOM_COMMON_FIELD_FALSE_STATEMENTS).setCheck(
-      null
+      null,
     );
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(210);
     this.setTooltip(
-      "条件が満たされた場合は1番目の文を、満たされない場合は2番目の文を実行します。"
+      "条件が満たされた場合は1番目の文を、満たされない場合は2番目の文を実行します。",
     );
   },
 };
@@ -64,11 +64,11 @@ javascriptGenerator[CUSTOM_COMMON_IF_ELSE] = (block) => {
     "false";
   const trueStatements = javascriptGenerator.statementToCode(
     block,
-    CUSTOM_COMMON_FIELD_TRUE_STATEMENTS
+    CUSTOM_COMMON_FIELD_TRUE_STATEMENTS,
   );
   const falseStatements = javascriptGenerator.statementToCode(
     block,
-    CUSTOM_COMMON_FIELD_FALSE_STATEMENTS
+    CUSTOM_COMMON_FIELD_FALSE_STATEMENTS,
   );
   return `if(${expression}){${trueStatements}}else{${falseStatements}}`;
 };
@@ -87,7 +87,7 @@ Blockly.Blocks[CUSTOM_COMMON_WHILE_TRUE] = {
 javascriptGenerator[CUSTOM_COMMON_WHILE_TRUE] = (block) => {
   const statements = javascriptGenerator.statementToCode(
     block,
-    CUSTOM_COMMON_FIELD_STATEMENTS
+    CUSTOM_COMMON_FIELD_STATEMENTS,
   );
   return `while(true){${statements}}`;
 };
@@ -110,7 +110,7 @@ javascriptGenerator[CUSTOM_COMMON_WHILE] = (block) => {
     "false";
   const statements = javascriptGenerator.statementToCode(
     block,
-    CUSTOM_COMMON_FIELD_STATEMENTS
+    CUSTOM_COMMON_FIELD_STATEMENTS,
   );
   return `while(${expression}){${statements}}`;
 };
@@ -133,7 +133,7 @@ javascriptGenerator[CUSTOM_COMMON_DO_UNTIL] = (block) => {
     "false";
   const statements = javascriptGenerator.statementToCode(
     block,
-    CUSTOM_COMMON_FIELD_STATEMENTS
+    CUSTOM_COMMON_FIELD_STATEMENTS,
   );
   return `while(!(${expression})){${statements}}`;
 };
@@ -159,7 +159,7 @@ javascriptGenerator[CUSTOM_COMMON_TIMES] = (block) => {
     "0";
   const statements = javascriptGenerator.statementToCode(
     block,
-    CUSTOM_COMMON_FIELD_STATEMENTS
+    CUSTOM_COMMON_FIELD_STATEMENTS,
   );
   return `for (var ${tempVariableName} = 0; ${tempVariableName} < (${expression}); ${tempVariableName}++) {${statements}}`;
 };
