@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Box, Flex, chakra, Icon, Link, Spacer } from "@chakra-ui/react";
-import { RiQuestionFill, RiGithubFill } from "react-icons/ri";
+import { RiGithubFill } from "react-icons/ri";
 import { Logo } from "../components/Logo";
 import { DrawWorkspace } from "../components/Draw";
 import { TutorialDialog } from "../components/TutorialDialog";
@@ -10,7 +10,6 @@ import { TutorialDialog } from "../components/TutorialDialog";
 export default function App(): JSX.Element {
   const [isTutorialDialogOpenedByUser, setIsTutorialDialogOpenedByUser] =
     useState(true);
-  const [isHelpDialogVisible, setIsHelpDialogVisible] = useState(true);
 
   return (
     <>

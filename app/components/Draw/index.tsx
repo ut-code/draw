@@ -2,7 +2,6 @@ import { useCallback, useRef, useState } from "react";
 import { Stack, Grid } from "@chakra-ui/react";
 import { useGetSet } from "react-use";
 import p5Types from "p5";
-import Sketch from "react-p5";
 import {
   // BlocklyEditorMessage,
   useBlocklyInterpreter,
@@ -31,6 +30,11 @@ import {
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
+import dynamic from "next/dynamic";
+
+const Sketch = dynamic(() => import("react-p5"), {
+  ssr: false,
+});
 
 const toolboxDefinition: BlocklyToolboxDefinition = {
   type: "category",
