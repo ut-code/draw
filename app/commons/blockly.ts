@@ -43,7 +43,7 @@ export function useBlocklyWorkspace({
 
   const getCode = useCallback(
     () => javascriptGenerator.workspaceToCode(workspaceRef.current),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -90,8 +90,8 @@ export function useBlocklyWorkspace({
           onCodeChange(
             latestCode,
             Blockly.Variables.allUsedVarModels(workspace).map(
-              (model: VariableModel) => model.name
-            )
+              (model: VariableModel) => model.name,
+            ),
           );
         }
       });

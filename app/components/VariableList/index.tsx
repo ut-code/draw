@@ -46,14 +46,15 @@ export default function VariableList({
         variableNames.map((name) => ({
           name,
           value: interpreter.getVariable(
-            ((javascriptGenerator as any).nameDB_ as Names).getName( // eslint-disable-line
+            ((javascriptGenerator as any).nameDB_ as Names).getName(
+              // eslint-disable-line
               name,
-              Names.NameType.VARIABLE
-            )
+              Names.NameType.VARIABLE,
+            ),
             // 空白文字を _ に置き換えたあと encodeURIComponent で UTF-8 に変換し、さらに % を _ に置き換え
             // encodeURIComponent(name.replace(/\s+/g, "_")).replace(/%/g, "_")
           ),
-        }))
+        })),
       );
     };
     interpreter.addListener("step", onStep);
@@ -89,7 +90,7 @@ export default function VariableList({
                 else
                   throw new Error(
                     `変数 ${name} の値 ${value} を表示できません。`,
-                    { cause: value }
+                    { cause: value },
                   );
               }
               return (

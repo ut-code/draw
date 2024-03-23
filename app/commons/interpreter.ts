@@ -13,7 +13,6 @@ export class BlocklyEditorMessage {
 }
 
 export type UseBlocklyInterpreterProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   globalFunctions: Record<string, (...args: any[]) => any>;
   executionInterval?: number;
   onStep?(blockId: string | null): void;
@@ -58,15 +57,24 @@ export function useBlocklyInterpreter({
     (code: string) => {
       jsInterpreterRef.current = new JSInterpreter(
         code,
-        (newInterpreter, globalScope) => {
+        (
+          newInterpreter: {
+            setProperty: (arg0: any, arg1: string, arg2: any) => void;
+            createNativeFunction: (arg0: {
+              (...args: any[]): any;
+              (blockId: string): void;
+            }) => any;
+          },
+          globalScope: any,
+        ) => {
           Object.entries(globalFunctions).forEach(
             ([functionName, globalFunction]) => {
               newInterpreter.setProperty(
                 globalScope,
                 functionName,
-                newInterpreter.createNativeFunction(globalFunction)
+                newInterpreter.createNativeFunction(globalFunction),
               );
-            }
+            },
           );
           newInterpreter.setProperty(
             globalScope,
@@ -74,12 +82,12 @@ export function useBlocklyInterpreter({
             newInterpreter.createNativeFunction((blockId: string) => {
               highlightedBlockIdRef.current = blockId;
               onStep?.(blockId);
-            })
+            }),
           );
-        }
+        },
       );
     },
-    [globalFunctions, onStep]
+    [globalFunctions, onStep],
   );
 
   const startExecution = useCallback(
@@ -87,7 +95,7 @@ export function useBlocklyInterpreter({
       prepareExecution(code);
       setExecutionState("running");
     },
-    [prepareExecution]
+    [prepareExecution],
   );
   const pauseExecution = useCallback(() => {
     setExecutionState("paused");
