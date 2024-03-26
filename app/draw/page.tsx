@@ -1,15 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Box, Flex, chakra, Icon, Link, Spacer } from "@chakra-ui/react";
 import { RiGithubFill } from "react-icons/ri";
 import { Logo } from "../components/Logo";
 import { DrawWorkspace } from "../components/Draw";
 import { TutorialDialog } from "../components/TutorialDialog";
+import { SaveModal } from "../components/SaveModal";
 
 export default function App(): JSX.Element {
   const [isTutorialDialogOpenedByUser, setIsTutorialDialogOpenedByUser] =
     useState(true);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+
+  const [title, setTitle] = useState("");
+  const [userName, setUserName] = useState("");
+
+  const handleSave = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(title, userName);
+
+    const url = "/api/draw";
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        userName: userName,
+        filePath: "test path",
+      }),
+    };
+
+    await fetch(url, params);
+  };
 
   return (
     <>
@@ -62,7 +87,7 @@ export default function App(): JSX.Element {
             height="100%"
             backgroundColor="white"
           >
-            <DrawWorkspace />
+            <DrawWorkspace setIsSaveModalOpen={setIsSaveModalOpen} />
           </Box>
         </Box>
       </Flex>
@@ -71,6 +96,18 @@ export default function App(): JSX.Element {
           onClose={() => {
             setIsTutorialDialogOpenedByUser(false);
           }}
+        />
+      )}
+      {isSaveModalOpen && (
+        <SaveModal
+          onClose={() => {
+            setIsSaveModalOpen(false);
+          }}
+          title={title}
+          setTitle={setTitle}
+          userName={userName}
+          setUserName={setUserName}
+          handleSave={handleSave}
         />
       )}
     </>
