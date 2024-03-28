@@ -92,16 +92,6 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
     };
   }
 
-  // const save = () => {
-  //   const canvas = document.getElementById(
-  //     "defaultCanvas0",
-  //   ) as HTMLCanvasElement;
-  //   const link = document.createElement("a");
-  //   link.href = canvas.toDataURL("image/jpeg");
-  //   link.download = "download.png";
-  //   link.click();
-  // };
-
   // interpreter に渡す関数は実行開始時に決定されるため、通常の state だと最新の情報が参照できません
   // このため、反則ですが内部的に ref を用いて状態管理をしている react-use の [useGetSet](https://github.com/streamich/react-use/blob/master/docs/useGetSet.md) を用いています。
   const [getState, setState] = useGetSet(init());

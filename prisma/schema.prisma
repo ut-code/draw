@@ -13,9 +13,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Draw {
-  id       String    @id @default(dbgenerated("uuid_generate_v4()"))
-  userName String
-  title    String
-  filePath String
+model Works {
+  id                    String  @id
+  userName              String
+  title                 String
+  permitToShowOnTopPage Boolean
 }
