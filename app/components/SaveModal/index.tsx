@@ -12,6 +12,7 @@ import {
   Flex,
   Spacer,
   FormControl,
+  Switch,
 } from "@chakra-ui/react";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
@@ -21,6 +22,8 @@ type SaveModalProps = {
   setTitle: Dispatch<SetStateAction<string>>;
   userName: string;
   setUserName: Dispatch<SetStateAction<string>>;
+  permitToShowOnTopPage: boolean;
+  setPermitToShowOnTopPage: Dispatch<SetStateAction<boolean>>;
   handleSave(e: FormEvent<HTMLFormElement>): void;
 };
 
@@ -44,14 +47,27 @@ export function SaveModal(props: SaveModalProps): JSX.Element {
                 type="text"
                 value={props.title}
                 onChange={(e) => props.setTitle(e.target.value)}
-              ></Input>
+                mb={6}
+              />
               <FormLabel>ニックネーム</FormLabel>
               <Input
                 type="text"
                 value={props.userName}
                 onChange={(e) => props.setUserName(e.target.value)}
-              ></Input>
-              <FormHelperText>個人情報を含めないでください。</FormHelperText>
+              />
+              <FormHelperText mb={6}>
+                個人情報を含めないでください。
+              </FormHelperText>
+              <Flex>
+                <Switch
+                  type="checkbox"
+                  isChecked={props.permitToShowOnTopPage}
+                  onChange={(e) =>
+                    props.setPermitToShowOnTopPage(e.target.checked)
+                  }
+                />
+                <FormLabel>トップページへの掲載を許可</FormLabel>
+              </Flex>
               <Flex>
                 <Spacer />
                 <Button my={2} colorScheme="blue" type="submit">

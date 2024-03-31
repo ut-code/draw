@@ -9,20 +9,24 @@ import { TutorialDialog } from "../components/TutorialDialog";
 import { SaveModal } from "../components/SaveModal";
 import { v4 as uuidv4 } from "uuid";
 import supabase from "../utils/supabase";
+import { SaveCompletedModal } from "../components/SaveCompletedModal";
 
 const saveWork = async (
   workId: string,
   title: string,
   userName: string,
   permitToShowOnTopPage: boolean,
-  file: string,
+  fileString: string,
 ) => {
-  const { data, error } = await supabase.storage
-    .from("work_image")
-    .upload(workId, file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
+  const fileBuffer = Buffer.from(
+    fileString.replace(/^data:\w+\/\w+;base64,/, ""),
+    "base64",
+  );
+  const file = new File([fileBuffer], workId, { type: "image/jpeg" });
+  await supabase.storage.from("work_image").upload(`${workId}.jpg`, file, {
+    cacheControl: "3600",
+    upsert: false,
+  });
 
   const url = "/api/draw";
   const params = {
@@ -35,6 +39,7 @@ const saveWork = async (
       title: title === "" ? "無題" : title,
       userName: userName === "" ? "名無し" : userName,
       permitToShowOnTopPage: permitToShowOnTopPage,
+      mode: "upload",
     }),
   };
 
@@ -45,18 +50,23 @@ export default function App(): JSX.Element {
   const [isTutorialDialogOpenedByUser, setIsTutorialDialogOpenedByUser] =
     useState(true);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [isSaveCompletedModalOpen, setIsSaveCompletedModalOpen] =
+    useState(false);
 
+  const [currentId, setCurrentId] = useState("");
   const [title, setTitle] = useState("");
   const [userName, setUserName] = useState("");
+  const [permitToShowOnTopPage, setPermitToShowOnTopPage] = useState(false);
 
   const handleSave = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const workId = uuidv4();
+    setCurrentId(workId);
     const canvas = document.getElementById(
       "defaultCanvas0",
     ) as HTMLCanvasElement;
     const file = canvas.toDataURL("image/jpeg");
-    saveWork(workId, title, userName, false, file);
+    saveWork(workId, title, userName, permitToShowOnTopPage, file);
   };
 
   return (
@@ -125,12 +135,23 @@ export default function App(): JSX.Element {
         <SaveModal
           onClose={() => {
             setIsSaveModalOpen(false);
+            setIsSaveCompletedModalOpen(true);
           }}
           title={title}
           setTitle={setTitle}
           userName={userName}
           setUserName={setUserName}
+          permitToShowOnTopPage={permitToShowOnTopPage}
+          setPermitToShowOnTopPage={setPermitToShowOnTopPage}
           handleSave={handleSave}
+        />
+      )}
+      {isSaveCompletedModalOpen && (
+        <SaveCompletedModal
+          currentId={currentId}
+          onClose={() => {
+            setIsSaveCompletedModalOpen(false);
+          }}
         />
       )}
     </>
