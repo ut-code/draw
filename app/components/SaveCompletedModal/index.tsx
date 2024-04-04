@@ -7,8 +7,10 @@ import {
   ModalCloseButton,
   Button,
   Text,
+  Flex,
 } from "@chakra-ui/react";
 import { RiExternalLinkLine } from "react-icons/ri";
+import { QRCodeSVG } from "qrcode.react";
 
 type SaveCompletedModalProps = {
   currentId: string;
@@ -28,6 +30,12 @@ export function SaveCompletedModal(
           <Text mb={3}>
             以下のQRコードを読み込むと、お手持ちのスマートフォンから作品を閲覧・ダウンロードできます。
           </Text>
+          <Flex justifyContent={"center"}>
+            <QRCodeSVG
+              value={`http://localhost:3000/work/${props.currentId}`}
+            />
+          </Flex>
+          <Text my={3}>または</Text>
           <Button
             onClick={() => {
               window.open(
@@ -36,7 +44,7 @@ export function SaveCompletedModal(
               );
             }}
           >
-            作品を見る
+            この端末で作品を見る
             <RiExternalLinkLine />
           </Button>
         </ModalBody>
