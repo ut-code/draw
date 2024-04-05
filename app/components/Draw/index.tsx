@@ -23,11 +23,19 @@ import {
   BUILTIN_MATH_NUMBER,
 } from "../../config/blockly.blocks";
 import {
+  CUSTOM_P5_POINT,
+  CUSTOM_P5_SQUARE,
+  CUSTOM_P5_TRIANGLE,
+  CUSTOM_P5_ELLIPSE,
   CUSTOM_P5_RECT,
   CUSTOM_P5_LINE,
   CUSTOM_P5_LINE_REL,
   CUSTOM_P5_SIN,
   CUSTOM_P5_COS,
+  CUSTOM_P5_RANDOM,
+  CUSTOM_P5_CIRCLE,
+  CUSTOM_P5_ARC,
+  CUSTOM_P5_QUAD
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
@@ -49,11 +57,19 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         BUILTIN_MATH_ARITHMETIC,
         BUILTIN_MATH_NUMBER,
         // ワークスペースごとに定義したブロック
-        CUSTOM_P5_RECT,
-        CUSTOM_P5_LINE,
-        CUSTOM_P5_LINE_REL,
         CUSTOM_P5_SIN,
         CUSTOM_P5_COS,
+        CUSTOM_P5_RANDOM,
+        CUSTOM_P5_ARC,
+        CUSTOM_P5_ELLIPSE,
+        CUSTOM_P5_CIRCLE,
+        CUSTOM_P5_LINE,
+        CUSTOM_P5_LINE_REL,
+        CUSTOM_P5_POINT,
+        CUSTOM_P5_QUAD,
+        CUSTOM_P5_RECT,
+        CUSTOM_P5_SQUARE,
+        CUSTOM_P5_TRIANGLE
       ],
     },
   ],
@@ -91,14 +107,111 @@ export function DrawWorkspace(): JSX.Element {
 
   // javascriptGenerator により生成されたコードから呼ばれる関数を定義します
   const globalFunctions = useRef({
-    [CUSTOM_P5_RECT]: () => {
+    [CUSTOM_P5_ARC]: (x: number, y: number, w: number, h: number, start: number, stop: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      checkUndefined(w);
+      checkUndefined(h);
+      checkUndefined(start);
+      checkUndefined(stop);
       const currentStateStart = getState();
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
-        p5.rect(0, 0, 100, 100);
+        p5.arc(x, y, w, h, (start/180)*Math.PI, (stop/180)*Math.PI);
       };
       setState({ ...currentStateStart, draw });
     },
+    [CUSTOM_P5_POINT]: (x: number, y: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.point(x, y);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+
+    [CUSTOM_P5_CIRCLE]: (x: number, y: number, d: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      checkUndefined(d);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.circle(x, y, d);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+
+    [CUSTOM_P5_SQUARE]: (x: number, y: number, s: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      checkUndefined(s);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.square(x, y, s);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+    [CUSTOM_P5_TRIANGLE]: (x1: number, y1: number, x2: number, y2: number, x3: number, y3: number) => {
+      checkUndefined(x1);
+      checkUndefined(y1);
+      checkUndefined(x2);
+      checkUndefined(y2);
+      checkUndefined(x3);
+      checkUndefined(y3);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.triangle(x1, y1, x2, y2, x3, y3);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+    [CUSTOM_P5_QUAD]: (x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4:number) => {
+      checkUndefined(x1);
+      checkUndefined(y1);
+      checkUndefined(x2);
+      checkUndefined(y2);
+      checkUndefined(x3);
+      checkUndefined(y3);
+      checkUndefined(x4);
+      checkUndefined(y4);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.quad(x1, y1, x2, y2, x3, y3, x4, y4);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+
+    [CUSTOM_P5_ELLIPSE]: (x: number, y: number, w: number, h: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      checkUndefined(w);
+      checkUndefined(h);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.ellipse(x, y, w, h);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+
+    [CUSTOM_P5_RECT]: (x: number, y: number, w: number, h: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      checkUndefined(w);
+      checkUndefined(h);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.rect(x, y, w, h);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+
     [CUSTOM_P5_LINE]: (x1: number, y1: number, x2: number, y2: number) => {
       checkUndefined(x1);
       checkUndefined(y1);
@@ -132,12 +245,17 @@ export function DrawWorkspace(): JSX.Element {
     [CUSTOM_P5_COS]: (x: number) => {
       checkUndefined(x);
       return Math.cos((x / 180) * Math.PI);
-    },
+    },    
+    [CUSTOM_P5_RANDOM]: (x: number, y: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      return Math.floor(Math.random() * (y - x + 1)) + x;
+    }
   }).current;
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(300, 300).parent(canvasParentRef);
-    p5.colorMode(p5.HSB, 100, 100, 100);
+    p5.colorMode(p5.RGB, 256); //色を実装したい
   };
 
   const windowResized = (p5: p5Types) => {
