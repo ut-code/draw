@@ -20,6 +20,8 @@ type SaveCompletedModalProps = {
 export function SaveCompletedModal(
   props: SaveCompletedModalProps,
 ): JSX.Element {
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
   return (
     <Modal size="lg" isOpen onClose={props.onClose}>
       <ModalOverlay />
@@ -31,17 +33,12 @@ export function SaveCompletedModal(
             以下のQRコードを読み込むと、お手持ちのスマートフォンから作品を閲覧・ダウンロードできます。
           </Text>
           <Flex justifyContent={"center"}>
-            <QRCodeSVG
-              value={`http://localhost:3000/work/${props.currentId}`}
-            />
+            <QRCodeSVG value={`${baseURL}/work/${props.currentId}`} />
           </Flex>
           <Text my={3}>または</Text>
           <Button
             onClick={() => {
-              window.open(
-                `http://localhost:3000/work/${props.currentId}`,
-                "_blank",
-              );
+              window.open(`${baseURL}/work/${props.currentId}`, "_blank");
             }}
           >
             この端末で作品を見る

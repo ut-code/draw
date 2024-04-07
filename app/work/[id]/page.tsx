@@ -1,16 +1,15 @@
 import DownloadButton from "@/app/components/DownloadButton";
 import supabase from "@/app/utils/supabase";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { headers } from "next/headers";
 
 export default async function Page({ params }: { params: { id: string } }) {
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
   const { data } = supabase.storage
     .from("work_image")
     .getPublicUrl(`${params.id}.jpg`);
 
-  const host = headers().get("host");
-
-  const response = await fetch(`http://${host}/api/draw`, {
+  const response = await fetch(`${baseURL}/api/draw`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
