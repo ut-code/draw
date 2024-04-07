@@ -13,6 +13,8 @@ import {
   Spacer,
   FormControl,
   Switch,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
@@ -68,6 +70,10 @@ export function SaveModal(props: SaveModalProps): JSX.Element {
                 />
                 <FormLabel>トップページへの掲載を許可</FormLabel>
               </Flex>
+              <Alert status="warning">
+                <AlertIcon />
+                送信された情報は第三者に閲覧される可能性があります。了承できる場合のみ保存ボタンを押してください。
+              </Alert>
               <Flex>
                 <Spacer />
                 <Button my={2} colorScheme="blue" type="submit">
