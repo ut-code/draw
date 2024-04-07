@@ -1,4 +1,5 @@
 import { useToast } from "@chakra-ui/react";
+//@ts-ignore
 import JSInterpreter from "js-interpreter";
 import { useCallback, useEffect, useRef, useState } from "react";
 import nullthrows from "nullthrows";

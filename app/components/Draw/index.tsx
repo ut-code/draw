@@ -1,5 +1,5 @@
-import { useCallback, useRef, useState } from "react";
-import { Stack, Grid } from "@chakra-ui/react";
+import { Dispatch, SetStateAction, useCallback, useRef, useState } from "react";
+import { Stack, Grid, Button } from "@chakra-ui/react";
 import { useGetSet } from "react-use";
 import p5Types from "p5";
 import {
@@ -76,7 +76,11 @@ function checkUndefined(value: number) {
   }
 }
 
-export function DrawWorkspace(): JSX.Element {
+type drawWorkspaceInput = {
+  setIsSaveModalOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
   function init(): P5WorkspaceState {
     const draw = (p5: p5Types) => {
       p5.background(255);
@@ -188,6 +192,7 @@ export function DrawWorkspace(): JSX.Element {
           draw={getState().draw}
           windowResized={windowResized}
         />
+        <Button onClick={() => props.setIsSaveModalOpen(true)}>保存</Button>
       </Stack>
     </Grid>
   );
