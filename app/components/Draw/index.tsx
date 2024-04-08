@@ -35,7 +35,13 @@ import {
   CUSTOM_P5_RANDOM,
   CUSTOM_P5_CIRCLE,
   CUSTOM_P5_ARC,
-  CUSTOM_P5_QUAD
+  CUSTOM_P5_QUAD,
+  CUSTOM_P5_COLOR,
+  CUSTOM_P5_TURTLE_COORDINATE,
+  CUSTOM_P5_TURTLE_COORDINATE_SET,
+  CUSTOM_P5_STROKE_WEIGHT,
+  CUSTOM_P5_STROKE_COLOR,
+  CUSTOM_P5_ERASE_OR_NO_ERASE
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
@@ -56,15 +62,31 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         BUILTIN_LOGIC_OPERATION,
         BUILTIN_MATH_ARITHMETIC,
         BUILTIN_MATH_NUMBER,
-        // ワークスペースごとに定義したブロック
         CUSTOM_P5_SIN,
         CUSTOM_P5_COS,
         CUSTOM_P5_RANDOM,
+      ],
+    },
+    {
+      name: "ペンを使う",
+      blockTypes: [
+        CUSTOM_P5_TURTLE_COORDINATE,
+        CUSTOM_P5_TURTLE_COORDINATE_SET,
+        CUSTOM_P5_LINE_REL,
+        CUSTOM_P5_STROKE_WEIGHT,
+        CUSTOM_P5_STROKE_COLOR,
+        CUSTOM_P5_ERASE_OR_NO_ERASE
+      ],
+    },
+    {
+      name: "座標を使う",
+      blockTypes: [
+        // ワークスペースごとに定義したブロック
+        CUSTOM_P5_COLOR,
         CUSTOM_P5_ARC,
         CUSTOM_P5_ELLIPSE,
         CUSTOM_P5_CIRCLE,
         CUSTOM_P5_LINE,
-        CUSTOM_P5_LINE_REL,
         CUSTOM_P5_POINT,
         CUSTOM_P5_QUAD,
         CUSTOM_P5_RECT,
@@ -75,6 +97,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
   ],
   enableVariables: true,
 };
+
 
 type P5WorkspaceState = {
   draw: (p5: p5Types) => void;
@@ -107,6 +130,72 @@ export function DrawWorkspace(): JSX.Element {
 
   // javascriptGenerator により生成されたコードから呼ばれる関数を定義します
   const globalFunctions = useRef({
+    [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        if(str === "下げる"){
+          p5.noErase();
+        }else{
+          p5.erase();
+        }
+      };
+      setState({ ...currentStateStart, draw });
+    },
+
+    [CUSTOM_P5_TURTLE_COORDINATE]: (coor: string) => {
+      const currentStateStart = getState();
+      const x = currentStateStart.currentX;
+      const y = currentStateStart.currentY;
+      if (coor === "x") {
+        return x; 
+      } else {
+        return y; 
+      }
+    },
+    
+    [CUSTOM_P5_STROKE_COLOR]: (r: number, g: number, b: number) => {
+      checkUndefined(r);
+      checkUndefined(g);
+      checkUndefined(b);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.stroke(r, g, b);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+
+    [CUSTOM_P5_STROKE_WEIGHT]: (w: number) => {
+      checkUndefined(w);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.strokeWeight(w);
+      };
+      setState({ ...currentStateStart, draw });
+    },
+    [CUSTOM_P5_TURTLE_COORDINATE_SET]: (x: number, y: number) => {
+      checkUndefined(x);
+      checkUndefined(y);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+      };
+      setState({ draw, currentX: x, currentY: y });
+    },
+    
+    [CUSTOM_P5_COLOR]: (r: number, g: number, b: number) => {
+      checkUndefined(r);
+      checkUndefined(g);
+      checkUndefined(b);
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.fill(p5.color(r, g, b));
+      };
+      setState({ ...currentStateStart, draw });
+    },
     [CUSTOM_P5_ARC]: (x: number, y: number, w: number, h: number, start: number, stop: number) => {
       checkUndefined(x);
       checkUndefined(y);
@@ -233,10 +322,10 @@ export function DrawWorkspace(): JSX.Element {
       const x2 = x1 + len * Math.cos((arg / 180) * Math.PI);
       const y2 = y1 + len * Math.sin((arg / 180) * Math.PI);
       const draw: (p5: p5Types) => void = (p5) => {
-        currentStateStart.draw(p5);
-        p5.line(x1, y1, x2, y2);
-      };
-      setState({ draw, currentX: x2, currentY: y2 });
+          currentStateStart.draw(p5);
+          p5.line(x1, y1, x2, y2);
+        };
+        setState({draw, currentX: x2, currentY: y2});
     },
     [CUSTOM_P5_SIN]: (x: number) => {
       checkUndefined(x);

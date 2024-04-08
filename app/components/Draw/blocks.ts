@@ -39,6 +39,154 @@ export const CUSTOM_P5_NUMBER_ARG = "custom_p5_number_arg";
 export const CUSTOM_P5_RANDOM_MIN = "custom_p5_random_min";
 export const CUSTOM_P5_RANDOM_MAX = "custom_p5_random_max";
 
+export const CUSTOM_P5_COLOR = "custom_p5_color";
+export const CUSTOM_P5_COLOR_RED = "custom_p5_color_red";
+export const CUSTOM_P5_COLOR_GREEN = "custom_p5_color_green";
+export const CUSTOM_P5_COLOR_BLUE = "custom_p5_color_blue";
+export const CUSTOM_P5_TURTLE_COORDINATE = "custom_p5_turtle_coordinate";
+export const CUSTOM_P5_TURTLE_COORDINATE_SET = "custom_p5_turtle_coordinate_set";
+export const CUSTOM_P5_STROKE_WEIGHT = "custom_p5_stroke_weight";
+export const CUSTOM_P5_STROKE_COLOR = "custom_p5_stroke_color";
+export const CUSTOM_P5_ERASE_OR_NO_ERASE = "custom_p5_erase_or_no_erase";
+
+Blockly.Blocks[CUSTOM_P5_ERASE_OR_NO_ERASE] = {
+  init() {
+    this.appendDummyInput()
+        .appendField("ペンを")
+        .appendField(new Blockly.FieldDropdown([["上げる","上げる"], ["下げる","下げる"]]), "field");
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+javascriptGenerator[CUSTOM_P5_ERASE_OR_NO_ERASE] = (block) => {
+  const dropdownValue = block.getFieldValue('field');
+  return `${CUSTOM_P5_ERASE_OR_NO_ERASE}('${dropdownValue}');`;
+};
+
+
+Blockly.Blocks[CUSTOM_P5_TURTLE_COORDINATE] = {
+  init() {
+    this.appendDummyInput()
+        .appendField("ペンの")
+        .appendField(new Blockly.FieldDropdown([["x","x"], ["y","y"]]), "field")
+        .appendField("座標");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE] = (block) => [
+  `${CUSTOM_P5_TURTLE_COORDINATE}(
+        ${javascriptGenerator.statementToCode(block, "field")}
+        )`,
+  0,
+];
+
+Blockly.Blocks[CUSTOM_P5_STROKE_COLOR] = {
+  init: function() {
+    this.appendValueInput("r")
+        .setCheck(null)
+        .appendField("ペンの色を（");
+    this.appendValueInput("g")
+        .setCheck(null)
+        .appendField(",");
+    this.appendValueInput("b")
+        .setCheck(null)
+        .appendField(",");
+    this.appendDummyInput()
+        .appendField(")にする");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+javascriptGenerator[CUSTOM_P5_STROKE_COLOR] = (block) =>
+  `${CUSTOM_P5_STROKE_COLOR}(
+        ${javascriptGenerator.valueToCode(block, "r", 0)},
+        ${javascriptGenerator.valueToCode(block, "g", 0)},
+        ${javascriptGenerator.valueToCode(block, "b", 0)}
+        );`;
+
+Blockly.Blocks[CUSTOM_P5_STROKE_WEIGHT] = {
+  init() {
+    this.setPreviousStatement(true, null);
+    this.appendValueInput("weight")
+        .setCheck(null)
+        .appendField("ペンの太さを");
+    this.appendDummyInput()
+        .appendField("にする");
+    this.setColour(230);
+    this.setInputsInline(true);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+javascriptGenerator[CUSTOM_P5_STROKE_WEIGHT] = (block) =>
+  `${CUSTOM_P5_STROKE_WEIGHT}(
+        ${javascriptGenerator.valueToCode(block, "weight", 0)}
+        );`;
+
+Blockly.Blocks[CUSTOM_P5_TURTLE_COORDINATE_SET] = {
+  init() {
+    this.setPreviousStatement(true, null);
+    this.appendDummyInput().appendField("ペンの位置を(");
+    this.appendValueInput("x").setCheck("Number");
+    this.appendDummyInput().appendField(",");
+    this.appendValueInput("y").setCheck("Number");
+    this.appendDummyInput().appendField(")にセットする");
+    this.setInputsInline(true);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+    this.setTooltip("");
+  },
+};
+javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE_SET] = (block) =>
+  `${CUSTOM_P5_TURTLE_COORDINATE_SET}(
+        ${javascriptGenerator.valueToCode(block, "x", 0)},
+        ${javascriptGenerator.valueToCode(block, "y", 0)}
+        );`;
+
+
+
+Blockly.Blocks[CUSTOM_P5_COLOR] = {
+  init() {
+    this.appendValueInput(CUSTOM_P5_COLOR_RED)
+        .setCheck(null)
+        .appendField("RGB(");
+    this.appendValueInput(CUSTOM_P5_COLOR_GREEN)
+        .setCheck(null)
+        .appendField(",");
+    this.appendValueInput(CUSTOM_P5_COLOR_BLUE)
+        .setCheck(null)
+        .appendField(",");
+    this.appendDummyInput()
+        .appendField(")");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+javascriptGenerator[CUSTOM_P5_COLOR] = (block) =>
+  `${CUSTOM_P5_COLOR}(
+        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_COLOR_RED, 0)},
+        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_COLOR_GREEN, 0)},
+        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_COLOR_BLUE, 0)}
+        );`;
+
 //四角形
 Blockly.Blocks[CUSTOM_P5_QUAD] = {
   init() {
