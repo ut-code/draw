@@ -48,6 +48,47 @@ export const CUSTOM_P5_TURTLE_COORDINATE_SET = "custom_p5_turtle_coordinate_set"
 export const CUSTOM_P5_STROKE_WEIGHT = "custom_p5_stroke_weight";
 export const CUSTOM_P5_STROKE_COLOR = "custom_p5_stroke_color";
 export const CUSTOM_P5_ERASE_OR_NO_ERASE = "custom_p5_erase_or_no_erase";
+export const CUSTOM_P5_COLOR_PRESET = "custom_p5_color_preset";
+export const CUSTOM_P5_STROKE_COLOR_PRESET = "custom_p5_stroke_color_preset";
+
+Blockly.Blocks[CUSTOM_P5_STROKE_COLOR_PRESET] = {
+  init() {
+    this.appendDummyInput()
+        .appendField("ペンの色を")
+        .appendField(new Blockly.FieldDropdown([["赤","赤"], ["緑","緑"], ["青","青"], ["黒","黒"]]), "field")
+        .appendField("にする");
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+javascriptGenerator[CUSTOM_P5_STROKE_COLOR_PRESET] = (block) => {
+  const dropdownValue = block.getFieldValue('field');
+  return `${CUSTOM_P5_STROKE_COLOR_PRESET}('${dropdownValue}');`;
+};
+
+Blockly.Blocks[CUSTOM_P5_COLOR_PRESET] = {
+  init() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["赤","赤"], ["緑","緑"], ["青","青"], ["黒","黒"]]), "field")
+        .appendField("で塗りつぶす");
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+javascriptGenerator[CUSTOM_P5_COLOR_PRESET] = (block) => {
+  const dropdownValue = block.getFieldValue('field');
+  return `${CUSTOM_P5_COLOR_PRESET}('${dropdownValue}');`;
+};
 
 Blockly.Blocks[CUSTOM_P5_ERASE_OR_NO_ERASE] = {
   init() {

@@ -41,7 +41,9 @@ import {
   CUSTOM_P5_TURTLE_COORDINATE_SET,
   CUSTOM_P5_STROKE_WEIGHT,
   CUSTOM_P5_STROKE_COLOR,
-  CUSTOM_P5_ERASE_OR_NO_ERASE
+  CUSTOM_P5_ERASE_OR_NO_ERASE,
+  CUSTOM_P5_COLOR_PRESET,
+  CUSTOM_P5_STROKE_COLOR_PRESET
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
@@ -75,6 +77,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         CUSTOM_P5_LINE_REL,
         CUSTOM_P5_STROKE_WEIGHT,
         CUSTOM_P5_STROKE_COLOR,
+        CUSTOM_P5_STROKE_COLOR_PRESET,
         CUSTOM_P5_ERASE_OR_NO_ERASE
       ],
     },
@@ -83,6 +86,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
       blockTypes: [
         // ワークスペースごとに定義したブロック
         CUSTOM_P5_COLOR,
+        CUSTOM_P5_COLOR_PRESET,
         CUSTOM_P5_ARC,
         CUSTOM_P5_ELLIPSE,
         CUSTOM_P5_CIRCLE,
@@ -130,6 +134,38 @@ export function DrawWorkspace(): JSX.Element {
 
   // javascriptGenerator により生成されたコードから呼ばれる関数を定義します
   const globalFunctions = useRef({
+    [CUSTOM_P5_STROKE_COLOR_PRESET]: (str: string) => {
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        if(str === "赤"){
+          p5.stroke(255, 0, 0);
+        }else if(str === "緑"){
+          p5.stroke(0, 255, 0);
+        }else if(str === "黒"){
+          p5.stroke(0, 0, 0);
+        }else{
+          p5.stroke(0, 0, 255);
+        }
+      };
+      setState({ ...currentStateStart, draw });
+    },
+    [CUSTOM_P5_COLOR_PRESET]: (str: string) => {
+      const currentStateStart = getState();
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        if(str === "赤"){
+          p5.fill(255, 0, 0);
+        }else if(str === "緑"){
+          p5.fill(0, 255, 0);
+        }else if(str === "黒"){
+          p5.stroke(0, 0, 0);
+        }else{
+          p5.fill(0, 0, 255);
+        }
+      };
+      setState({ ...currentStateStart, draw });
+    },
     [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
       const currentStateStart = getState();
       const draw: (p5: p5Types) => void = (p5) => {
