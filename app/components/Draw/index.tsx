@@ -43,7 +43,7 @@ import {
   CUSTOM_P5_STROKE_COLOR,
   CUSTOM_P5_ERASE_OR_NO_ERASE,
   CUSTOM_P5_COLOR_PRESET,
-  CUSTOM_P5_STROKE_COLOR_PRESET
+  CUSTOM_P5_STROKE_COLOR_PRESET,
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
@@ -78,7 +78,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         CUSTOM_P5_STROKE_WEIGHT,
         CUSTOM_P5_STROKE_COLOR,
         CUSTOM_P5_STROKE_COLOR_PRESET,
-        CUSTOM_P5_ERASE_OR_NO_ERASE
+        CUSTOM_P5_ERASE_OR_NO_ERASE,
       ],
     },
     {
@@ -95,13 +95,12 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         CUSTOM_P5_QUAD,
         CUSTOM_P5_RECT,
         CUSTOM_P5_SQUARE,
-        CUSTOM_P5_TRIANGLE
+        CUSTOM_P5_TRIANGLE,
       ],
     },
   ],
   enableVariables: true,
 };
-
 
 type P5WorkspaceState = {
   draw: (p5: p5Types) => void;
@@ -138,13 +137,13 @@ export function DrawWorkspace(): JSX.Element {
       const currentStateStart = getState();
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
-        if(str === "赤"){
+        if (str === "赤") {
           p5.stroke(255, 0, 0);
-        }else if(str === "緑"){
+        } else if (str === "緑") {
           p5.stroke(0, 255, 0);
-        }else if(str === "黒"){
+        } else if (str === "黒") {
           p5.stroke(0, 0, 0);
-        }else{
+        } else {
           p5.stroke(0, 0, 255);
         }
       };
@@ -154,13 +153,13 @@ export function DrawWorkspace(): JSX.Element {
       const currentStateStart = getState();
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
-        if(str === "赤"){
+        if (str === "赤") {
           p5.fill(255, 0, 0);
-        }else if(str === "緑"){
+        } else if (str === "緑") {
           p5.fill(0, 255, 0);
-        }else if(str === "黒"){
+        } else if (str === "黒") {
           p5.stroke(0, 0, 0);
-        }else{
+        } else {
           p5.fill(0, 0, 255);
         }
       };
@@ -170,9 +169,9 @@ export function DrawWorkspace(): JSX.Element {
       const currentStateStart = getState();
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
-        if(str === "下げる"){
+        if (str === "下げる") {
           p5.noErase();
-        }else{
+        } else {
           p5.erase();
         }
       };
@@ -184,12 +183,12 @@ export function DrawWorkspace(): JSX.Element {
       const x = currentStateStart.currentX;
       const y = currentStateStart.currentY;
       if (coor === "x") {
-        return x; 
+        return x;
       } else {
-        return y; 
+        return y;
       }
     },
-    
+
     [CUSTOM_P5_STROKE_COLOR]: (r: number, g: number, b: number) => {
       checkUndefined(r);
       checkUndefined(g);
@@ -220,7 +219,7 @@ export function DrawWorkspace(): JSX.Element {
       };
       setState({ draw, currentX: x, currentY: y });
     },
-    
+
     [CUSTOM_P5_COLOR]: (r: number, g: number, b: number) => {
       checkUndefined(r);
       checkUndefined(g);
@@ -232,7 +231,14 @@ export function DrawWorkspace(): JSX.Element {
       };
       setState({ ...currentStateStart, draw });
     },
-    [CUSTOM_P5_ARC]: (x: number, y: number, w: number, h: number, start: number, stop: number) => {
+    [CUSTOM_P5_ARC]: (
+      x: number,
+      y: number,
+      w: number,
+      h: number,
+      start: number,
+      stop: number,
+    ) => {
       checkUndefined(x);
       checkUndefined(y);
       checkUndefined(w);
@@ -242,7 +248,7 @@ export function DrawWorkspace(): JSX.Element {
       const currentStateStart = getState();
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
-        p5.arc(x, y, w, h, (start/180)*Math.PI, (stop/180)*Math.PI);
+        p5.arc(x, y, w, h, (start / 180) * Math.PI, (stop / 180) * Math.PI);
       };
       setState({ ...currentStateStart, draw });
     },
@@ -280,7 +286,14 @@ export function DrawWorkspace(): JSX.Element {
       };
       setState({ ...currentStateStart, draw });
     },
-    [CUSTOM_P5_TRIANGLE]: (x1: number, y1: number, x2: number, y2: number, x3: number, y3: number) => {
+    [CUSTOM_P5_TRIANGLE]: (
+      x1: number,
+      y1: number,
+      x2: number,
+      y2: number,
+      x3: number,
+      y3: number,
+    ) => {
       checkUndefined(x1);
       checkUndefined(y1);
       checkUndefined(x2);
@@ -294,7 +307,16 @@ export function DrawWorkspace(): JSX.Element {
       };
       setState({ ...currentStateStart, draw });
     },
-    [CUSTOM_P5_QUAD]: (x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4:number) => {
+    [CUSTOM_P5_QUAD]: (
+      x1: number,
+      y1: number,
+      x2: number,
+      y2: number,
+      x3: number,
+      y3: number,
+      x4: number,
+      y4: number,
+    ) => {
       checkUndefined(x1);
       checkUndefined(y1);
       checkUndefined(x2);
@@ -358,10 +380,10 @@ export function DrawWorkspace(): JSX.Element {
       const x2 = x1 + len * Math.cos((arg / 180) * Math.PI);
       const y2 = y1 + len * Math.sin((arg / 180) * Math.PI);
       const draw: (p5: p5Types) => void = (p5) => {
-          currentStateStart.draw(p5);
-          p5.line(x1, y1, x2, y2);
-        };
-        setState({draw, currentX: x2, currentY: y2});
+        currentStateStart.draw(p5);
+        p5.line(x1, y1, x2, y2);
+      };
+      setState({ draw, currentX: x2, currentY: y2 });
     },
     [CUSTOM_P5_SIN]: (x: number) => {
       checkUndefined(x);
@@ -370,12 +392,12 @@ export function DrawWorkspace(): JSX.Element {
     [CUSTOM_P5_COS]: (x: number) => {
       checkUndefined(x);
       return Math.cos((x / 180) * Math.PI);
-    },    
+    },
     [CUSTOM_P5_RANDOM]: (x: number, y: number) => {
       checkUndefined(x);
       checkUndefined(y);
       return Math.floor(Math.random() * (y - x + 1)) + x;
-    }
+    },
   }).current;
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {

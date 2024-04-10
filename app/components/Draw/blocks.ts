@@ -7,8 +7,8 @@ export const CUSTOM_P5_ARC = "arc";
 export const CUSTOM_P5_QUAD = "quad";
 export const CUSTOM_P5_POINT = "point";
 export const CUSTOM_P5_CIRCLE = "circle";
-export const CUSTOM_P5_SQUARE ="square";
-export const CUSTOM_P5_ELLIPSE ="ellipse";
+export const CUSTOM_P5_SQUARE = "square";
+export const CUSTOM_P5_ELLIPSE = "ellipse";
 export const CUSTOM_P5_RECT = "rect";
 export const CUSTOM_P5_TRIANGLE = "triangle";
 export const CUSTOM_P5_LINE = "line";
@@ -44,7 +44,8 @@ export const CUSTOM_P5_COLOR_RED = "custom_p5_color_red";
 export const CUSTOM_P5_COLOR_GREEN = "custom_p5_color_green";
 export const CUSTOM_P5_COLOR_BLUE = "custom_p5_color_blue";
 export const CUSTOM_P5_TURTLE_COORDINATE = "custom_p5_turtle_coordinate";
-export const CUSTOM_P5_TURTLE_COORDINATE_SET = "custom_p5_turtle_coordinate_set";
+export const CUSTOM_P5_TURTLE_COORDINATE_SET =
+  "custom_p5_turtle_coordinate_set";
 export const CUSTOM_P5_STROKE_WEIGHT = "custom_p5_stroke_weight";
 export const CUSTOM_P5_STROKE_COLOR = "custom_p5_stroke_color";
 export const CUSTOM_P5_ERASE_OR_NO_ERASE = "custom_p5_erase_or_no_erase";
@@ -54,74 +55,101 @@ export const CUSTOM_P5_STROKE_COLOR_PRESET = "custom_p5_stroke_color_preset";
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR_PRESET] = {
   init() {
     this.appendDummyInput()
-        .appendField("ペンの色を")
-        .appendField(new Blockly.FieldDropdown([["赤","赤"], ["緑","緑"], ["青","青"], ["黒","黒"]]), "field")
-        .appendField("にする");
+      .appendField("ペンの色を")
+      .appendField(
+        new Blockly.FieldDropdown([
+          ["赤", "赤"],
+          ["緑", "緑"],
+          ["青", "青"],
+          ["黒", "黒"],
+        ]),
+        "field",
+      )
+      .appendField("にする");
     this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-  }
+  },
 };
 
 javascriptGenerator[CUSTOM_P5_STROKE_COLOR_PRESET] = (block) => {
-  const dropdownValue = block.getFieldValue('field');
+  const dropdownValue = block.getFieldValue("field");
   return `${CUSTOM_P5_STROKE_COLOR_PRESET}('${dropdownValue}');`;
 };
 
 Blockly.Blocks[CUSTOM_P5_COLOR_PRESET] = {
   init() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["赤","赤"], ["緑","緑"], ["青","青"], ["黒","黒"]]), "field")
-        .appendField("で塗りつぶす");
+      .appendField(
+        new Blockly.FieldDropdown([
+          ["赤", "赤"],
+          ["緑", "緑"],
+          ["青", "青"],
+          ["黒", "黒"],
+        ]),
+        "field",
+      )
+      .appendField("で塗りつぶす");
     this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-  }
+  },
 };
 
 javascriptGenerator[CUSTOM_P5_COLOR_PRESET] = (block) => {
-  const dropdownValue = block.getFieldValue('field');
+  const dropdownValue = block.getFieldValue("field");
   return `${CUSTOM_P5_COLOR_PRESET}('${dropdownValue}');`;
 };
 
 Blockly.Blocks[CUSTOM_P5_ERASE_OR_NO_ERASE] = {
   init() {
     this.appendDummyInput()
-        .appendField("ペンを")
-        .appendField(new Blockly.FieldDropdown([["上げる","上げる"], ["下げる","下げる"]]), "field");
+      .appendField("ペンを")
+      .appendField(
+        new Blockly.FieldDropdown([
+          ["上げる", "上げる"],
+          ["下げる", "下げる"],
+        ]),
+        "field",
+      );
     this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-  }
+  },
 };
 
 javascriptGenerator[CUSTOM_P5_ERASE_OR_NO_ERASE] = (block) => {
-  const dropdownValue = block.getFieldValue('field');
+  const dropdownValue = block.getFieldValue("field");
   return `${CUSTOM_P5_ERASE_OR_NO_ERASE}('${dropdownValue}');`;
 };
-
 
 Blockly.Blocks[CUSTOM_P5_TURTLE_COORDINATE] = {
   init() {
     this.appendDummyInput()
-        .appendField("ペンの")
-        .appendField(new Blockly.FieldDropdown([["x","x"], ["y","y"]]), "field")
-        .appendField("座標");
+      .appendField("ペンの")
+      .appendField(
+        new Blockly.FieldDropdown([
+          ["x", "x"],
+          ["y", "y"],
+        ]),
+        "field",
+      )
+      .appendField("座標");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE] = (block) => [
   `${CUSTOM_P5_TURTLE_COORDINATE}(
@@ -131,25 +159,18 @@ javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE] = (block) => [
 ];
 
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR] = {
-  init: function() {
-    this.appendValueInput("r")
-        .setCheck(null)
-        .appendField("ペンの色を（");
-    this.appendValueInput("g")
-        .setCheck(null)
-        .appendField(",");
-    this.appendValueInput("b")
-        .setCheck(null)
-        .appendField(",");
-    this.appendDummyInput()
-        .appendField(")にする");
+  init: function () {
+    this.appendValueInput("r").setCheck(null).appendField("ペンの色を（");
+    this.appendValueInput("g").setCheck(null).appendField(",");
+    this.appendValueInput("b").setCheck(null).appendField(",");
+    this.appendDummyInput().appendField(")にする");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_STROKE_COLOR] = (block) =>
   `${CUSTOM_P5_STROKE_COLOR}(
@@ -161,17 +182,14 @@ javascriptGenerator[CUSTOM_P5_STROKE_COLOR] = (block) =>
 Blockly.Blocks[CUSTOM_P5_STROKE_WEIGHT] = {
   init() {
     this.setPreviousStatement(true, null);
-    this.appendValueInput("weight")
-        .setCheck(null)
-        .appendField("ペンの太さを");
-    this.appendDummyInput()
-        .appendField("にする");
+    this.appendValueInput("weight").setCheck(null).appendField("ペンの太さを");
+    this.appendDummyInput().appendField("にする");
     this.setColour(230);
     this.setInputsInline(true);
     this.setNextStatement(true, null);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_STROKE_WEIGHT] = (block) =>
   `${CUSTOM_P5_STROKE_WEIGHT}(
@@ -198,28 +216,23 @@ javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE_SET] = (block) =>
         ${javascriptGenerator.valueToCode(block, "y", 0)}
         );`;
 
-
-
 Blockly.Blocks[CUSTOM_P5_COLOR] = {
   init() {
     this.appendValueInput(CUSTOM_P5_COLOR_RED)
-        .setCheck(null)
-        .appendField("RGB(");
+      .setCheck(null)
+      .appendField("RGB(");
     this.appendValueInput(CUSTOM_P5_COLOR_GREEN)
-        .setCheck(null)
-        .appendField(",");
-    this.appendValueInput(CUSTOM_P5_COLOR_BLUE)
-        .setCheck(null)
-        .appendField(",");
-    this.appendDummyInput()
-        .appendField(")");
+      .setCheck(null)
+      .appendField(",");
+    this.appendValueInput(CUSTOM_P5_COLOR_BLUE).setCheck(null).appendField(",");
+    this.appendDummyInput().appendField(")");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
 };
 javascriptGenerator[CUSTOM_P5_COLOR] = (block) =>
   `${CUSTOM_P5_COLOR}(
@@ -232,38 +245,29 @@ javascriptGenerator[CUSTOM_P5_COLOR] = (block) =>
 Blockly.Blocks[CUSTOM_P5_QUAD] = {
   init() {
     this.appendValueInput(CUSTOM_P5_NUMBER_X1)
-        .setCheck(null)
-        .appendField("四角形: 四点の座標(");
-    this.appendValueInput(CUSTOM_P5_NUMBER_Y1)
-        .setCheck(null)
-        .appendField(",");
+      .setCheck(null)
+      .appendField("四角形: 四点の座標(");
+    this.appendValueInput(CUSTOM_P5_NUMBER_Y1).setCheck(null).appendField(",");
     this.appendValueInput(CUSTOM_P5_NUMBER_X2)
-        .setCheck(null)
-        .appendField("),(");
-    this.appendValueInput(CUSTOM_P5_NUMBER_Y2)
-        .setCheck(null)
-        .appendField(",");
+      .setCheck(null)
+      .appendField("),(");
+    this.appendValueInput(CUSTOM_P5_NUMBER_Y2).setCheck(null).appendField(",");
     this.appendValueInput(CUSTOM_P5_NUMBER_X3)
-        .setCheck(null)
-        .appendField("),(");
-    this.appendValueInput(CUSTOM_P5_NUMBER_Y3)
-        .setCheck(null)
-        .appendField(",");
+      .setCheck(null)
+      .appendField("),(");
+    this.appendValueInput(CUSTOM_P5_NUMBER_Y3).setCheck(null).appendField(",");
     this.appendValueInput(CUSTOM_P5_NUMBER_X4)
-        .setCheck(null)
-        .appendField("),(");
-    this.appendValueInput(CUSTOM_P5_NUMBER_Y4)
-        .setCheck(null)
-        .appendField(",");
-    this.appendDummyInput()
-        .appendField(")");
+      .setCheck(null)
+      .appendField("),(");
+    this.appendValueInput(CUSTOM_P5_NUMBER_Y4).setCheck(null).appendField(",");
+    this.appendDummyInput().appendField(")");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_QUAD] = (block) =>
   `${CUSTOM_P5_QUAD}(
@@ -281,32 +285,25 @@ javascriptGenerator[CUSTOM_P5_QUAD] = (block) =>
 Blockly.Blocks[CUSTOM_P5_ARC] = {
   init() {
     this.appendValueInput(CUSTOM_P5_X)
-        .setCheck(null)
-        .appendField("弧: 中心の座標(");
-    this.appendValueInput(CUSTOM_P5_Y)
-        .setCheck(null)
-        .appendField(",");
-    this.appendValueInput(CUSTOM_P5_WIDTH)
-        .setCheck(null)
-        .appendField(") 幅");
-    this.appendValueInput(CUSTOM_P5_HEIGHT)
-        .setCheck(null)
-        .appendField("高さ");
+      .setCheck(null)
+      .appendField("弧: 中心の座標(");
+    this.appendValueInput(CUSTOM_P5_Y).setCheck(null).appendField(",");
+    this.appendValueInput(CUSTOM_P5_WIDTH).setCheck(null).appendField(") 幅");
+    this.appendValueInput(CUSTOM_P5_HEIGHT).setCheck(null).appendField("高さ");
     this.appendValueInput(CUSTOM_P5_ARC_START)
-        .setCheck(null)
-        .appendField(" 時計回りに");
+      .setCheck(null)
+      .appendField(" 時計回りに");
     this.appendValueInput(CUSTOM_P5_ARC_STOP)
-        .setCheck(null)
-        .appendField("度から");
-    this.appendDummyInput()
-        .appendField("度まで");
+      .setCheck(null)
+      .appendField("度から");
+    this.appendDummyInput().appendField("度まで");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
 };
 javascriptGenerator[CUSTOM_P5_ARC] = (block) =>
   `${CUSTOM_P5_ARC}(
@@ -321,21 +318,16 @@ javascriptGenerator[CUSTOM_P5_ARC] = (block) =>
 //点
 Blockly.Blocks[CUSTOM_P5_POINT] = {
   init() {
-    this.appendValueInput(CUSTOM_P5_X)
-        .setCheck(null)
-        .appendField("点: 座標(");
-    this.appendValueInput(CUSTOM_P5_Y)
-        .setCheck(null)
-        .appendField(",");
-    this.appendDummyInput()
-        .appendField(")");
+    this.appendValueInput(CUSTOM_P5_X).setCheck(null).appendField("点: 座標(");
+    this.appendValueInput(CUSTOM_P5_Y).setCheck(null).appendField(",");
+    this.appendDummyInput().appendField(")");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_POINT] = (block) =>
   `${CUSTOM_P5_POINT}(
@@ -347,21 +339,17 @@ javascriptGenerator[CUSTOM_P5_POINT] = (block) =>
 Blockly.Blocks[CUSTOM_P5_CIRCLE] = {
   init() {
     this.appendValueInput(CUSTOM_P5_X)
-        .setCheck(null)
-        .appendField("円: 中心の座標(");
-    this.appendValueInput(CUSTOM_P5_Y)
-        .setCheck(null)
-        .appendField(",");
-    this.appendValueInput(CUSTOM_P5_WIDTH)
-        .setCheck(null)
-        .appendField(") 直径");
+      .setCheck(null)
+      .appendField("円: 中心の座標(");
+    this.appendValueInput(CUSTOM_P5_Y).setCheck(null).appendField(",");
+    this.appendValueInput(CUSTOM_P5_WIDTH).setCheck(null).appendField(") 直径");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_CIRCLE] = (block) =>
   `${CUSTOM_P5_CIRCLE}(
@@ -374,21 +362,19 @@ javascriptGenerator[CUSTOM_P5_CIRCLE] = (block) =>
 Blockly.Blocks[CUSTOM_P5_SQUARE] = {
   init() {
     this.appendValueInput(CUSTOM_P5_X)
-        .setCheck(null)
-        .appendField("正方形: 左上の頂点の座標(");
-    this.appendValueInput(CUSTOM_P5_Y)
-        .setCheck(null)
-        .appendField(",");
+      .setCheck(null)
+      .appendField("正方形: 左上の頂点の座標(");
+    this.appendValueInput(CUSTOM_P5_Y).setCheck(null).appendField(",");
     this.appendValueInput(CUSTOM_P5_WIDTH)
-        .setCheck(null)
-        .appendField(") 一辺の長さ");
+      .setCheck(null)
+      .appendField(") 一辺の長さ");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_SQUARE] = (block) =>
   `${CUSTOM_P5_SQUARE}(
@@ -401,32 +387,25 @@ javascriptGenerator[CUSTOM_P5_SQUARE] = (block) =>
 Blockly.Blocks[CUSTOM_P5_TRIANGLE] = {
   init() {
     this.appendValueInput(CUSTOM_P5_NUMBER_X1)
-        .setCheck(null)
-        .appendField("三角形: 三点の座標(");
-    this.appendValueInput(CUSTOM_P5_NUMBER_Y1)
-        .setCheck(null)
-        .appendField(",");
+      .setCheck(null)
+      .appendField("三角形: 三点の座標(");
+    this.appendValueInput(CUSTOM_P5_NUMBER_Y1).setCheck(null).appendField(",");
     this.appendValueInput(CUSTOM_P5_NUMBER_X2)
-        .setCheck(null)
-        .appendField("),(");
-    this.appendValueInput(CUSTOM_P5_NUMBER_Y2)
-        .setCheck(null)
-        .appendField(",");
+      .setCheck(null)
+      .appendField("),(");
+    this.appendValueInput(CUSTOM_P5_NUMBER_Y2).setCheck(null).appendField(",");
     this.appendValueInput(CUSTOM_P5_NUMBER_X3)
-        .setCheck(null)
-        .appendField("),(");
-    this.appendValueInput(CUSTOM_P5_NUMBER_Y3)
-        .setCheck(null)
-        .appendField(",");
-    this.appendDummyInput()
-        .appendField(")");
+      .setCheck(null)
+      .appendField("),(");
+    this.appendValueInput(CUSTOM_P5_NUMBER_Y3).setCheck(null).appendField(",");
+    this.appendDummyInput().appendField(")");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_TRIANGLE] = (block) =>
   `${CUSTOM_P5_TRIANGLE}(
@@ -442,24 +421,18 @@ javascriptGenerator[CUSTOM_P5_TRIANGLE] = (block) =>
 Blockly.Blocks[CUSTOM_P5_ELLIPSE] = {
   init() {
     this.appendValueInput(CUSTOM_P5_X)
-        .setCheck(null)
-        .appendField("楕円: 中心の座標（");
-    this.appendValueInput(CUSTOM_P5_Y)
-        .setCheck(null)
-        .appendField(",");
-    this.appendValueInput(CUSTOM_P5_WIDTH)
-        .setCheck(null)
-        .appendField(") 幅");
-    this.appendValueInput(CUSTOM_P5_HEIGHT)
-        .setCheck(null)
-        .appendField("高さ");
+      .setCheck(null)
+      .appendField("楕円: 中心の座標（");
+    this.appendValueInput(CUSTOM_P5_Y).setCheck(null).appendField(",");
+    this.appendValueInput(CUSTOM_P5_WIDTH).setCheck(null).appendField(") 幅");
+    this.appendValueInput(CUSTOM_P5_HEIGHT).setCheck(null).appendField("高さ");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_ELLIPSE] = (block) =>
   `${CUSTOM_P5_ELLIPSE}(
@@ -473,24 +446,18 @@ javascriptGenerator[CUSTOM_P5_ELLIPSE] = (block) =>
 Blockly.Blocks[CUSTOM_P5_RECT] = {
   init() {
     this.appendValueInput(CUSTOM_P5_X)
-        .setCheck(null)
-        .appendField("長方形: 左上の頂点の座標（");
-    this.appendValueInput(CUSTOM_P5_Y)
-        .setCheck(null)
-        .appendField(",");
-    this.appendValueInput(CUSTOM_P5_WIDTH)
-        .setCheck(null)
-        .appendField(") 幅");
-    this.appendValueInput(CUSTOM_P5_HEIGHT)
-        .setCheck(null)
-        .appendField("高さ");
+      .setCheck(null)
+      .appendField("長方形: 左上の頂点の座標（");
+    this.appendValueInput(CUSTOM_P5_Y).setCheck(null).appendField(",");
+    this.appendValueInput(CUSTOM_P5_WIDTH).setCheck(null).appendField(") 幅");
+    this.appendValueInput(CUSTOM_P5_HEIGHT).setCheck(null).appendField("高さ");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_RECT] = (block) =>
   `${CUSTOM_P5_RECT}(
@@ -583,23 +550,20 @@ javascriptGenerator[CUSTOM_P5_COS] = (block) => [
 
 Blockly.Blocks[CUSTOM_P5_RANDOM] = {
   init() {
-    this.appendValueInput(CUSTOM_P5_RANDOM_MIN)
-        .setCheck(null);
-    this.appendDummyInput()
-        .appendField("以上");
-    this.appendValueInput(CUSTOM_P5_RANDOM_MAX)
-        .setCheck(null);
-    this.appendDummyInput()
-        .appendField("以下のランダムな整数"); 
+    this.appendValueInput(CUSTOM_P5_RANDOM_MIN).setCheck(null);
+    this.appendDummyInput().appendField("以上");
+    this.appendValueInput(CUSTOM_P5_RANDOM_MAX).setCheck(null);
+    this.appendDummyInput().appendField("以下のランダムな整数");
     this.setOutput(true, "Number");
     this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
-  }
+  },
 };
 javascriptGenerator[CUSTOM_P5_RANDOM] = (block) => [
   `${CUSTOM_P5_RANDOM}(
         ${javascriptGenerator.valueToCode(block, CUSTOM_P5_RANDOM_MIN, 0)},
         ${javascriptGenerator.valueToCode(block, CUSTOM_P5_RANDOM_MAX, 0)}
-        )`, 0,
+        )`,
+  0,
 ];
