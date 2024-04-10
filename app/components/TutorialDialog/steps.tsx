@@ -23,7 +23,9 @@ export const tutorialSteps = [
     title: "drawについて",
     content: (
       <>
-        <Text my={2}>drawは、スクラッチのように簡単なプログラミングで色々な図形を書いてみようという企画です。</Text>
+        <Text my={2}>
+          drawは、スクラッチのように簡単なプログラミングで色々な図形を書いてみようという企画です。
+        </Text>
       </>
     ),
   },
