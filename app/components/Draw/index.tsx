@@ -1,5 +1,16 @@
 import { Dispatch, SetStateAction, useCallback, useRef, useState } from "react";
-import { Stack, Grid, Button } from "@chakra-ui/react";
+import {
+  Stack,
+  Grid,
+  Box,
+  Button,
+  Flex,
+  Tbody,
+  Tr,
+  Table,
+  Text,
+  chakra,
+} from "@chakra-ui/react";
 import { useGetSet } from "react-use";
 import p5Types from "p5";
 import {
@@ -31,9 +42,13 @@ import {
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const Sketch = dynamic(() => import("react-p5"), {
   ssr: false,
+});
+const Td = chakra("td", {
+  baseStyle: { border: "1px solid gray", px: 2, py: 1 },
 });
 
 const toolboxDefinition: BlocklyToolboxDefinition = {
@@ -144,12 +159,12 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
   }).current;
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
-    p5.createCanvas(300, 300).parent(canvasParentRef);
+    p5.createCanvas(500, 500).parent(canvasParentRef);
     p5.colorMode(p5.HSB, 100, 100, 100);
   };
 
   const windowResized = (p5: p5Types) => {
-    p5.resizeCanvas(300, 300);
+    p5.resizeCanvas(500, 500);
   };
 
   const [interval, setInterval] = useState(500);
@@ -166,7 +181,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
   });
 
   return (
-    <Grid h="100%" templateColumns="1fr 25rem">
+    <Grid h="100%" templateColumns="1fr 0.75fr">
       <div ref={workspaceAreaRef} />
       <Stack p={4} spacing={2} overflow="auto">
         <ExecutionManager
@@ -187,12 +202,44 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
             return undefined;
           }}
         />
-        <Sketch
-          setup={setup}
-          draw={getState().draw}
-          windowResized={windowResized}
-        />
-        <Button onClick={() => props.setIsSaveModalOpen(true)}>保存</Button>
+        <Grid templateColumns={"0.25fr 0.75fr"}>
+          <Text fontSize="xl" mt={2} mr={2}>
+            ペンの位置
+          </Text>
+          <Table>
+            <Tbody>
+              <Tr>
+                <Td>左から {getState().currentX.toPrecision(3)}</Td>
+                <Td>上から {getState().currentY.toPrecision(3)}</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </Grid>
+        <Flex justifyContent={"center"}>
+          <Image
+            style={{ marginTop: "23px" }}
+            src="./side_scale.svg"
+            width={23}
+            height={500}
+            alt="side scale"
+          />
+          <Box>
+            <Image
+              src="./top_scale.svg"
+              width={500}
+              height={23}
+              alt="side scale"
+            />
+            <Sketch
+              setup={setup}
+              draw={getState().draw}
+              windowResized={windowResized}
+            />
+          </Box>
+        </Flex>
+        <Button onClick={() => props.setIsSaveModalOpen(true)} py={2}>
+          保存
+        </Button>
       </Stack>
     </Grid>
   );
