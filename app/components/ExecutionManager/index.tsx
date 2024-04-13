@@ -26,10 +26,10 @@ export function ExecutionManager(props: ExecutionManagerProps): JSX.Element {
   return (
     <VStack align="stretch" spacing={3}>
       <Box>
-        <Text fontSize="xl" mb={2}>
-          実行
-        </Text>
         <Grid autoFlow="column" autoColumns="1fr" gap={2}>
+          <Text fontSize="xl" mt={1}>
+            実行
+          </Text>
           <Button
             colorScheme="blue"
             variant="outline"
@@ -71,10 +71,10 @@ export function ExecutionManager(props: ExecutionManagerProps): JSX.Element {
         </Grid>
       </Box>
       <Box>
-        <Text fontSize="xl" mb={2}>
-          実行速度
-        </Text>
         <Flex align="center">
+          <Text fontSize="xl" mr={2}>
+            実行速度
+          </Text>
           <Text>遅い</Text>
           <Box flexGrow={1} px={4}>
             <Slider
