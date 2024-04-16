@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Text, chakra } from "@chakra-ui/react";
+import { Grid, Text, chakra } from "@chakra-ui/react";
 import { Names } from "blockly";
 import { BlocklyInterpreter } from "../../commons/interpreter";
 import { javascriptGenerator } from "../../config/blockly";
@@ -64,8 +64,10 @@ export default function VariableList({
   }, [interpreter, variableNames]);
 
   return (
-    <div>
-      <Text fontSize="xl">変数</Text>
+    <Grid templateColumns={"0.25fr 0.75fr"}>
+      <Text fontSize="xl" mt={1} mr={2}>
+        変数{" "}
+      </Text>
       {!variables?.length ? (
         <Text fontSize="sm" mt={1} color="gray.500">
           変数はありません。
@@ -103,6 +105,6 @@ export default function VariableList({
           </Tbody>
         </Table>
       )}
-    </div>
+    </Grid>
   );
 }

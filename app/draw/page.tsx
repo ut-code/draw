@@ -57,8 +57,10 @@ export default function App(): JSX.Element {
   const [title, setTitle] = useState("");
   const [userName, setUserName] = useState("");
   const [permitToShowOnTopPage, setPermitToShowOnTopPage] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async (e: FormEvent<HTMLFormElement>) => {
+    setIsSaving(true);
     e.preventDefault();
     const workId = uuidv4();
     setCurrentId(workId);
@@ -66,7 +68,11 @@ export default function App(): JSX.Element {
       "defaultCanvas0",
     ) as HTMLCanvasElement;
     const file = canvas.toDataURL("image/jpeg");
-    saveWork(workId, title, userName, permitToShowOnTopPage, file);
+    saveWork(workId, title, userName, permitToShowOnTopPage, file).then(() => {
+      setIsSaving(false);
+      setIsSaveModalOpen(false);
+      setIsSaveCompletedModalOpen(true);
+    });
   };
 
   return (
@@ -80,7 +86,7 @@ export default function App(): JSX.Element {
           px={3}
         >
           <Logo />
-          <Box display={{ base: "none", lg: "block" }} fontSize="xl">
+          <Box display={{ base: "none", lg: "block" }} mx={2} fontSize="xl">
             draw
           </Box>
           <Spacer />
@@ -105,7 +111,7 @@ export default function App(): JSX.Element {
               px={2}
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/ut-code/may-fes-93-algorithm"
+              href="https://github.com/ut-code/draw"
             >
               <Icon w={6} h={6} as={RiGithubFill} />
             </Link>
@@ -135,8 +141,8 @@ export default function App(): JSX.Element {
         <SaveModal
           onClose={() => {
             setIsSaveModalOpen(false);
-            setIsSaveCompletedModalOpen(true);
           }}
+          isSaving={isSaving}
           title={title}
           setTitle={setTitle}
           userName={userName}

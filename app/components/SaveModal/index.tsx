@@ -15,11 +15,13 @@ import {
   Switch,
   Alert,
   AlertIcon,
+  CircularProgress,
 } from "@chakra-ui/react";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
 type SaveModalProps = {
   onClose(): void;
+  isSaving: boolean;
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
   userName: string;
@@ -40,7 +42,6 @@ export function SaveModal(props: SaveModalProps): JSX.Element {
           <form
             onSubmit={(e) => {
               props.handleSave(e);
-              props.onClose();
             }}
           >
             <FormControl>
@@ -74,9 +75,22 @@ export function SaveModal(props: SaveModalProps): JSX.Element {
                 <AlertIcon />
                 送信された情報は第三者に閲覧される可能性があります。了承できる場合のみ保存ボタンを押してください。
               </Alert>
-              <Flex>
+              <Flex alignItems={"center"}>
                 <Spacer />
-                <Button my={2} colorScheme="blue" type="submit">
+                {props.isSaving && (
+                  <CircularProgress
+                    isIndeterminate
+                    color="blue.500"
+                    size={"30px"}
+                  />
+                )}
+                <Button
+                  ml={2}
+                  my={2}
+                  colorScheme="blue"
+                  type="submit"
+                  isDisabled={props.isSaving}
+                >
                   保存
                 </Button>
               </Flex>
