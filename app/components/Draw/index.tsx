@@ -119,6 +119,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
     },
   ],
   enableVariables: true,
+  enableProcedures: true,
 };
 
 type P5WorkspaceState = {

@@ -8,11 +8,12 @@ export type BlocklyToolboxDefinitionFlyout = {
   blockTypes: string[];
 };
 
-/** ブロックの数が多い場合、もしくは変数が必要な場合 */
+/** ブロックの数が多い場合、もしくは変数・関数が必要な場合 */
 export type BlocklyToolboxDefinitionCategory = {
   type: "category";
   categories: Array<{ name: string; blockTypes: string[] }>;
   enableVariables?: boolean;
+  enableProcedures?: boolean;
 };
 
 export type BlocklyToolboxDefinition =
@@ -72,6 +73,9 @@ export function useBlocklyWorkspace({
                 })),
                 ...(toolboxDefinition.enableVariables
                   ? [{ kind: "category", name: "変数", custom: "VARIABLE" }]
+                  : []),
+                ...(toolboxDefinition.enableProcedures
+                  ? [{ kind: "category", name: "関数", custom: "PROCEDURE" }]
                   : []),
               ],
             },
