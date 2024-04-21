@@ -125,6 +125,7 @@ type P5WorkspaceState = {
   draw: (p5: p5Types) => void;
   currentX: number;
   currentY: number;
+  turtleReady: boolean;
 };
 
 function checkUndefined(value: number) {
@@ -146,6 +147,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       draw,
       currentX: 0,
       currentY: 0,
+      turtleReady: true
     };
   }
 
@@ -156,6 +158,35 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
 
   // javascriptGenerator により生成されたコードから呼ばれる関数を定義します
   const globalFunctions = useRef({
+    [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
+      const currentStateStart = getState();
+      let ready = true;
+        if (str === "上げる") {
+          ready = false;
+        } else {
+          ready = true;
+        }
+      setState({ ...currentStateStart, turtleReady: ready});
+    },
+    [CUSTOM_P5_LINE_REL]: (len: number, arg: number) => {
+      checkUndefined(len);
+      checkUndefined(arg);
+      const currentStateStart = getState();
+      const x1 = currentStateStart.currentX;
+      const y1 = currentStateStart.currentY;
+      const x2 = x1 + len * Math.cos((arg / 180) * Math.PI);
+      const y2 = y1 + len * Math.sin((arg / 180) * Math.PI);
+      const ready = currentStateStart.turtleReady;
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.line(x1, y1, x2, y2);
+      };
+      if(ready === true){
+        setState({ ...currentStateStart, draw, currentX: x2, currentY: y2, turtleReady: true});
+      }else{
+        setState({ ...currentStateStart, currentX: x2, currentY: y2, turtleReady: false});
+      }
+    },
     [CUSTOM_P5_STROKE_COLOR_PRESET]: (str: string) => {
       const currentStateStart = getState();
       const draw: (p5: p5Types) => void = (p5) => {
@@ -188,19 +219,6 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       };
       setState({ ...currentStateStart, draw });
     },
-    [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
-      const currentStateStart = getState();
-      const draw: (p5: p5Types) => void = (p5) => {
-        currentStateStart.draw(p5);
-        if (str === "下げる") {
-          p5.noErase();
-        } else {
-          p5.erase();
-        }
-      };
-      setState({ ...currentStateStart, draw });
-    },
-
     [CUSTOM_P5_TURTLE_COORDINATE]: (coor: string) => {
       const currentStateStart = getState();
       const x = currentStateStart.currentX;
@@ -237,10 +255,11 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       checkUndefined(x);
       checkUndefined(y);
       const currentStateStart = getState();
+      const ready = currentStateStart.turtleReady;
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
       };
-      setState({ draw, currentX: x, currentY: y });
+      setState({ draw, currentX: x, currentY: y, turtleReady: ready});
     },
 
     [CUSTOM_P5_COLOR]: (r: number, g: number, b: number) => {
@@ -394,20 +413,6 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       };
       setState({ ...currentStateStart, draw });
     },
-    [CUSTOM_P5_LINE_REL]: (len: number, arg: number) => {
-      checkUndefined(len);
-      checkUndefined(arg);
-      const currentStateStart = getState();
-      const x1 = currentStateStart.currentX;
-      const y1 = currentStateStart.currentY;
-      const x2 = x1 + len * Math.cos((arg / 180) * Math.PI);
-      const y2 = y1 + len * Math.sin((arg / 180) * Math.PI);
-      const draw: (p5: p5Types) => void = (p5) => {
-        currentStateStart.draw(p5);
-        p5.line(x1, y1, x2, y2);
-      };
-      setState({ draw, currentX: x2, currentY: y2 });
-    },
     [CUSTOM_P5_SIN]: (x: number) => {
       checkUndefined(x);
       return Math.sin((x / 180) * Math.PI);
@@ -476,6 +481,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
               <Tr>
                 <Td>左から {getState().currentX.toPrecision(3)}</Td>
                 <Td>上から {getState().currentY.toPrecision(3)}</Td>
+                <Td> {getState().turtleReady? 'true' : 'false'}</Td>
               </Tr>
             </Tbody>
           </Table>
