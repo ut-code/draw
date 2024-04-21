@@ -147,7 +147,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       draw,
       currentX: 0,
       currentY: 0,
-      turtleReady: true
+      turtleReady: true,
     };
   }
 
@@ -161,12 +161,12 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
     [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
       const currentStateStart = getState();
       let ready = true;
-        if (str === "上げる") {
-          ready = false;
-        } else {
-          ready = true;
-        }
-      setState({ ...currentStateStart, turtleReady: ready});
+      if (str === "上げる") {
+        ready = false;
+      } else {
+        ready = true;
+      }
+      setState({ ...currentStateStart, turtleReady: ready });
     },
     [CUSTOM_P5_LINE_REL]: (len: number, arg: number) => {
       checkUndefined(len);
@@ -181,10 +181,21 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
         currentStateStart.draw(p5);
         p5.line(x1, y1, x2, y2);
       };
-      if(ready === true){
-        setState({ ...currentStateStart, draw, currentX: x2, currentY: y2, turtleReady: true});
-      }else{
-        setState({ ...currentStateStart, currentX: x2, currentY: y2, turtleReady: false});
+      if (ready === true) {
+        setState({
+          ...currentStateStart,
+          draw,
+          currentX: x2,
+          currentY: y2,
+          turtleReady: true,
+        });
+      } else {
+        setState({
+          ...currentStateStart,
+          currentX: x2,
+          currentY: y2,
+          turtleReady: false,
+        });
       }
     },
     [CUSTOM_P5_STROKE_COLOR_PRESET]: (str: string) => {
@@ -259,7 +270,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
       };
-      setState({ draw, currentX: x, currentY: y, turtleReady: ready});
+      setState({ draw, currentX: x, currentY: y, turtleReady: ready });
     },
 
     [CUSTOM_P5_COLOR]: (r: number, g: number, b: number) => {
@@ -481,7 +492,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
               <Tr>
                 <Td>左から {getState().currentX.toPrecision(3)}</Td>
                 <Td>上から {getState().currentY.toPrecision(3)}</Td>
-                <Td> {getState().turtleReady? 'true' : 'false'}</Td>
+                <Td> {getState().turtleReady ? "true" : "false"}</Td>
               </Tr>
             </Tbody>
           </Table>
