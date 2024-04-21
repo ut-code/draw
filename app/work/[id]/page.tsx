@@ -28,6 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
+      <meta name="robots" content="noindex" />
       <Flex justify={"center"} mt={"10%"}>
         <svg style={{ width: "80%", height: "40vh" }}>
           <image
