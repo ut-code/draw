@@ -160,12 +160,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
   const globalFunctions = useRef({
     [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
       const currentStateStart = getState();
-      let ready = true;
-      if (str === "上げる") {
-        ready = false;
-      } else {
-        ready = true;
-      }
+      const ready = str === "下げる";
       setState({ ...currentStateStart, turtleReady: ready });
     },
     [CUSTOM_P5_LINE_REL]: (len: number, arg: number) => {
@@ -187,14 +182,12 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
           draw,
           currentX: x2,
           currentY: y2,
-          turtleReady: true,
         });
       } else {
         setState({
           ...currentStateStart,
           currentX: x2,
           currentY: y2,
-          turtleReady: false,
         });
       }
     },
@@ -266,11 +259,10 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       checkUndefined(x);
       checkUndefined(y);
       const currentStateStart = getState();
-      const ready = currentStateStart.turtleReady;
       const draw: (p5: p5Types) => void = (p5) => {
         currentStateStart.draw(p5);
       };
-      setState({ draw, currentX: x, currentY: y, turtleReady: ready });
+      setState({ ...currentStateStart, draw, currentX: x, currentY: y });
     },
 
     [CUSTOM_P5_COLOR]: (r: number, g: number, b: number) => {
@@ -492,7 +484,6 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
               <Tr>
                 <Td>左から {getState().currentX.toPrecision(3)}</Td>
                 <Td>上から {getState().currentY.toPrecision(3)}</Td>
-                <Td> {getState().turtleReady ? "true" : "false"}</Td>
               </Tr>
             </Tbody>
           </Table>
