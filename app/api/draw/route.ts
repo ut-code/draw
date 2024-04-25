@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   const request = await req.json();
   const mode = request.mode;
 
-  if (mode == "upload") {
+  if (mode === "upload") {
     const res = await prisma.works.create({
       data: {
         id: request.workId,
@@ -16,10 +16,18 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(res);
-  } else if (mode == "download") {
+  } else if (mode === "download") {
     const res = await prisma.works.findMany({
       where: {
         id: request.workId,
+      },
+    });
+
+    return NextResponse.json(res);
+  } else if (mode === "public_download") {
+    const res = await prisma.works.findMany({
+      where: {
+        permitToShowOnTopPage: true,
       },
     });
 
