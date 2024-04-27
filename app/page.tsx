@@ -1,10 +1,110 @@
-import Link from "next/link";
+import supabase from "./utils/supabase";
+import Image from "next/image";
+import { Box, Button, Grid, Heading, Text, VStack } from "@chakra-ui/react";
+import "./styles/style.css";
+import { Logo } from "./components/Logo";
 
-export default function Home() {
+export default async function Home() {
+  const EXTRACT_NUMBER = 10;
+
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const response = await fetch(`${baseURL}/api/draw`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      mode: "public_download",
+    }),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("fetch failed");
+  }
+
+  const workData: string[] = await response
+    .json()
+    .then((datas) => datas.map((data: { id: string }) => data.id));
+
+  const imageURLs = workData.map(
+    (id) =>
+      supabase.storage.from("work_image").getPublicUrl(`${id}.jpg`).data
+        .publicUrl,
+  );
+
+  const extractedImageURLsTop = imageURLs
+    .sort(() => Math.random() - 0.5)
+    .slice(0, EXTRACT_NUMBER);
+  const extractedImageURLsBottom = imageURLs
+    .sort(() => Math.random() - 0.5)
+    .slice(0, EXTRACT_NUMBER);
+
   return (
     <>
-      <div>ここに作品を展示する</div>
-      <Link href="/draw">blockly環境はこちら</Link>
+      <Box mt={"5vh"} mb={"5vh"}>
+        <VStack justify={"center"} width="100%">
+          <Logo />
+          <Heading as="h1" size="4xl">
+            draw
+          </Heading>
+          <Text fontSize="lg">
+            ブロックプログラミングであなただけの絵を描こう！
+          </Text>
+          <Button as="a" href="/draw">
+            はじめる
+          </Button>
+        </VStack>
+      </Box>
+      <Box className="slide-contents">
+        <Grid templateColumns={`repeat(${EXTRACT_NUMBER},1fr)`} gap={10}>
+          {extractedImageURLsTop.map((url) => (
+            <Image
+              src={url}
+              alt="image"
+              key={`${url}_1`}
+              width={300}
+              height={300}
+            />
+          ))}
+        </Grid>
+        <Grid templateColumns={`repeat(${EXTRACT_NUMBER},1fr)`} gap={10}>
+          {extractedImageURLsTop.map((url) => (
+            <Image
+              src={url}
+              alt="image"
+              key={`${url}_2`}
+              width={300}
+              height={300}
+            />
+          ))}
+        </Grid>
+      </Box>
+      <Box className="slide-contents-reverse">
+        <Grid templateColumns={`repeat(${EXTRACT_NUMBER},1fr)`} gap={10}>
+          {extractedImageURLsBottom.map((url) => (
+            <Image
+              src={url}
+              alt="image"
+              key={`${url}_3`}
+              width={300}
+              height={300}
+            />
+          ))}
+        </Grid>
+        <Grid templateColumns={`repeat(${EXTRACT_NUMBER},1fr)`} gap={10}>
+          {extractedImageURLsBottom.map((url) => (
+            <Image
+              src={url}
+              alt="image"
+              key={`${url}_4`}
+              width={300}
+              height={300}
+            />
+          ))}
+        </Grid>
+      </Box>
     </>
   );
 }
