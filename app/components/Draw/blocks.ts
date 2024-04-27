@@ -51,6 +51,28 @@ export const CUSTOM_P5_STROKE_COLOR = "custom_p5_stroke_color";
 export const CUSTOM_P5_ERASE_OR_NO_ERASE = "custom_p5_erase_or_no_erase";
 export const CUSTOM_P5_COLOR_PRESET = "custom_p5_color_preset";
 export const CUSTOM_P5_STROKE_COLOR_PRESET = "custom_p5_stroke_color_preset";
+export const CUSTOM_P5_ANGLE_CHANGE = "custom_p5_angle_change";
+
+Blockly.Blocks[CUSTOM_P5_ANGLE_CHANGE] = {
+  init() {
+    this.appendValueInput("angle")
+      .setCheck(null)
+      .appendField("直線: 今向いている方向から時計回りに");
+    this.appendValueInput("length").setCheck(null).appendField("度回転して");
+    this.appendDummyInput().appendField("だけ進む");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+};
+javascriptGenerator[CUSTOM_P5_ANGLE_CHANGE] = (block) =>
+  `${CUSTOM_P5_ANGLE_CHANGE}(
+        ${javascriptGenerator.valueToCode(block, "angle", 0)},
+        ${javascriptGenerator.valueToCode(block, "length", 0)}
+        );`;
 
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR_PRESET] = {
   init() {
@@ -496,11 +518,11 @@ javascriptGenerator[CUSTOM_P5_LINE] = (block) =>
 Blockly.Blocks[CUSTOM_P5_LINE_REL] = {
   init() {
     this.setPreviousStatement(true, null);
-    this.appendDummyInput().appendField("直線: ペンの位置から長さ");
+    this.appendDummyInput().appendField("直線: 長さ");
     this.appendValueInput(CUSTOM_P5_MUMBER_REL).setCheck("Number");
-    this.appendDummyInput().appendField("角度");
+    this.appendDummyInput().appendField("横軸に対して");
     this.appendValueInput(CUSTOM_P5_NUMBER_ARG).setCheck("Number");
-    this.appendDummyInput().appendField("度");
+    this.appendDummyInput().appendField("度で進む");
     this.setInputsInline(true);
     this.setNextStatement(true, null);
     this.setColour(330);
