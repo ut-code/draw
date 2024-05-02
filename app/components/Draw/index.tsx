@@ -54,11 +54,13 @@ import {
   CUSTOM_P5_ERASE_OR_NO_ERASE,
   CUSTOM_P5_COLOR_PRESET,
   CUSTOM_P5_STROKE_COLOR_PRESET,
+  CUSTOM_P5_ANGLE_CHANGE,
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { ImArrowRight2 } from "react-icons/im";
 
 const Sketch = dynamic(() => import("react-p5"), {
   ssr: false,
@@ -94,6 +96,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         CUSTOM_P5_TURTLE_COORDINATE,
         CUSTOM_P5_TURTLE_COORDINATE_SET,
         CUSTOM_P5_LINE_REL,
+        CUSTOM_P5_ANGLE_CHANGE,
         CUSTOM_P5_STROKE_WEIGHT,
         CUSTOM_P5_STROKE_COLOR,
         CUSTOM_P5_STROKE_COLOR_PRESET,
@@ -127,6 +130,7 @@ type P5WorkspaceState = {
   currentX: number;
   currentY: number;
   turtleReady: boolean;
+  angle: number;
 };
 
 function checkUndefined(value: number) {
@@ -149,6 +153,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       currentX: 0,
       currentY: 0,
       turtleReady: true,
+      angle: 0,
     };
   }
 
@@ -159,12 +164,44 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
 
   // javascriptGenerator により生成されたコードから呼ばれる関数を定義します
   const globalFunctions = useRef({
+    [CUSTOM_P5_ANGLE_CHANGE]: (arg: number, len: number) => {
+      checkUndefined(len);
+      checkUndefined(arg);
+      const currentStateStart = getState();
+      const arg1 = currentStateStart.angle;
+      const arg2 = arg1 + arg;
+      const x1 = currentStateStart.currentX;
+      const y1 = currentStateStart.currentY;
+      const x2 = x1 + len * Math.cos((arg2 / 180) * Math.PI);
+      const y2 = y1 + len * Math.sin((arg2 / 180) * Math.PI);
+      const ready = currentStateStart.turtleReady;
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.line(x1, y1, x2, y2);
+      };
+      if (ready === true) {
+        setState({
+          ...currentStateStart,
+          draw,
+          currentX: x2,
+          currentY: y2,
+          angle: arg2,
+        });
+      } else {
+        setState({
+          ...currentStateStart,
+          currentX: x2,
+          currentY: y2,
+          angle: arg2,
+        });
+      }
+    },
     [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
       const currentStateStart = getState();
       const ready = str === "下げる";
       setState({ ...currentStateStart, turtleReady: ready });
     },
-    [CUSTOM_P5_LINE_REL]: (len: number, arg: number) => {
+    [CUSTOM_P5_LINE_REL]: (arg: number, len: number) => {
       checkUndefined(len);
       checkUndefined(arg);
       const currentStateStart = getState();
@@ -183,12 +220,14 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
           draw,
           currentX: x2,
           currentY: y2,
+          angle: arg,
         });
       } else {
         setState({
           ...currentStateStart,
           currentX: x2,
           currentY: y2,
+          angle: arg,
         });
       }
     },
