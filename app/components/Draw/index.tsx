@@ -256,7 +256,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
         } else if (str === "緑") {
           p5.fill(0, 255, 0);
         } else if (str === "黒") {
-          p5.stroke(0, 0, 0);
+          p5.fill(0, 0, 0);
         } else {
           p5.fill(0, 0, 255);
         }
