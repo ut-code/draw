@@ -534,14 +534,14 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
         <Flex justifyContent={"center"}>
           <Image
             style={{ marginTop: "23px" }}
-            src="./side_scale.svg"
+            src="/side_scale.svg"
             width={23}
             height={500}
             alt="side scale"
           />
           <Box>
             <Image
-              src="./top_scale.svg"
+              src="/top_scale.svg"
               width={500}
               height={23}
               alt="side scale"
@@ -553,7 +553,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
                 windowResized={windowResized}
               />
               <Image
-                src="./pen.svg"
+                src="/pen.svg"
                 width={PEN_IMAGE_WIDTH}
                 height={PEN_IMAGE_HEIGHT}
                 alt="pen"

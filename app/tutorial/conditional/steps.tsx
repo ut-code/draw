@@ -1,7 +1,5 @@
 import { AspectRatio, Box, Grid, Image, Text } from "@chakra-ui/react";
 
-export const tutorialTitle = "draw";
-
 export const tutorialSteps = [
   {
     title: "基本操作",

@@ -12,18 +12,22 @@ import {
   Icon,
   HStack,
 } from "@chakra-ui/react";
-import { tutorialSteps } from "./steps";
-import { tutorialTitle } from "./steps";
 
 type TutorialDialogProps = {
   onClose(): void;
+  tutorialTitle: string;
+  tutorialSteps: {
+    title: string;
+    content: JSX.Element;
+  }[];
 };
 
 export function TutorialDialog(props: TutorialDialogProps): JSX.Element {
+  const { onClose, tutorialTitle, tutorialSteps } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
-    <Modal size="4xl" isOpen onClose={props.onClose}>
+    <Modal size="4xl" isOpen onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{tutorialTitle}</ModalHeader>
