@@ -1,6 +1,14 @@
 import supabase from "./utils/supabase";
 import Image from "next/image";
-import { Box, Button, Flex, Grid, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import "./styles/style.css";
 import { Logo } from "./components/Logo";
 
