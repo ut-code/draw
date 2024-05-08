@@ -60,7 +60,6 @@ import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { ImArrowRight2 } from "react-icons/im";
 
 const Sketch = dynamic(() => import("react-p5"), {
   ssr: false,
@@ -471,6 +470,10 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
     },
   }).current;
 
+  const PEN_IMAGE_HEIGHT = 20;
+  const PEN_IMAGE_WIDTH = 40;
+  const PEN_TOP_MARGIN = 8;
+
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(500, 500).parent(canvasParentRef);
     p5.colorMode(p5.RGB, 256); //色を実装したい
@@ -543,11 +546,33 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
               height={23}
               alt="side scale"
             />
-            <Sketch
-              setup={setup}
-              draw={getState().draw}
-              windowResized={windowResized}
-            />
+            <Box position="relative">
+              <Sketch
+                setup={setup}
+                draw={getState().draw}
+                windowResized={windowResized}
+              />
+              <Image
+                src="./pen.svg"
+                width={PEN_IMAGE_WIDTH}
+                height={PEN_IMAGE_HEIGHT}
+                alt="pen"
+                style={{
+                  position: "absolute",
+                  left:
+                    getState().currentX +
+                    (PEN_IMAGE_WIDTH / 2) *
+                      Math.cos((getState().angle / 180) * Math.PI) -
+                    PEN_IMAGE_WIDTH / 2,
+                  top:
+                    getState().currentY -
+                    PEN_TOP_MARGIN +
+                    (PEN_IMAGE_WIDTH / 2) *
+                      Math.sin((getState().angle / 180) * Math.PI),
+                  transform: `rotate(${getState().angle}deg)`,
+                }}
+              />
+            </Box>
           </Box>
         </Flex>
         <Button onClick={() => props.setIsSaveModalOpen(true)} py={2}>
