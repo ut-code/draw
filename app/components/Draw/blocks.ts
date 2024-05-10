@@ -74,7 +74,9 @@ Blockly.Blocks[CUSTOM_P5_ANGLE_CHANGE] = {
     this.appendValueInput("angle")
       .setCheck(null)
       .appendField("今向いている方向から時計回りに");
-    this.appendValueInput("length").setCheck(null).appendField("度回転して距離");
+    this.appendValueInput("length")
+      .setCheck(null)
+      .appendField("度回転して距離");
     this.appendDummyInput().appendField("だけ進む");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
