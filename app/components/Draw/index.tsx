@@ -55,6 +55,7 @@ import {
   CUSTOM_P5_COLOR_PRESET,
   CUSTOM_P5_STROKE_COLOR_PRESET,
   CUSTOM_P5_ANGLE_CHANGE,
+  CUSTOM_P5_GET_ANGLE,
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
@@ -100,6 +101,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         CUSTOM_P5_STROKE_COLOR,
         CUSTOM_P5_STROKE_COLOR_PRESET,
         CUSTOM_P5_ERASE_OR_NO_ERASE,
+        CUSTOM_P5_GET_ANGLE,
       ],
     },
     {
@@ -163,6 +165,10 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
 
   // javascriptGenerator により生成されたコードから呼ばれる関数を定義します
   const globalFunctions = useRef({
+    [CUSTOM_P5_GET_ANGLE]: () => {
+      const currentStateStart = getState();
+      return currentStateStart.angle;
+    },
     [CUSTOM_P5_ANGLE_CHANGE]: (arg: number, len: number) => {
       checkUndefined(len);
       checkUndefined(arg);
@@ -255,7 +261,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
         } else if (str === "緑") {
           p5.fill(0, 255, 0);
         } else if (str === "黒") {
-          p5.stroke(0, 0, 0);
+          p5.fill(0, 0, 0);
         } else {
           p5.fill(0, 0, 255);
         }

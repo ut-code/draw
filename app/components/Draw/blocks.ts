@@ -52,6 +52,22 @@ export const CUSTOM_P5_ERASE_OR_NO_ERASE = "custom_p5_erase_or_no_erase";
 export const CUSTOM_P5_COLOR_PRESET = "custom_p5_color_preset";
 export const CUSTOM_P5_STROKE_COLOR_PRESET = "custom_p5_stroke_color_preset";
 export const CUSTOM_P5_ANGLE_CHANGE = "custom_p5_angle_change";
+export const CUSTOM_P5_GET_ANGLE = "custom_p5_get_angle";
+
+Blockly.Blocks[CUSTOM_P5_GET_ANGLE] = {
+  init() {
+    this.appendDummyInput().appendField("ペンの角度");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+};
+javascriptGenerator[CUSTOM_P5_GET_ANGLE] = (block) => [
+  `${CUSTOM_P5_GET_ANGLE}(
+        )`,
+  0,
+];
 
 Blockly.Blocks[CUSTOM_P5_ANGLE_CHANGE] = {
   init() {
