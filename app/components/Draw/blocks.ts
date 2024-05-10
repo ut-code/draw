@@ -73,13 +73,13 @@ Blockly.Blocks[CUSTOM_P5_ANGLE_CHANGE] = {
   init() {
     this.appendValueInput("angle")
       .setCheck(null)
-      .appendField("直線: 今向いている方向から時計回りに");
-    this.appendValueInput("length").setCheck(null).appendField("度回転して");
+      .appendField("今向いている方向から時計回りに");
+    this.appendValueInput("length").setCheck(null).appendField("度回転して距離");
     this.appendDummyInput().appendField("だけ進む");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(330);
     this.setTooltip("");
     this.setHelpUrl("");
   },
@@ -237,11 +237,11 @@ javascriptGenerator[CUSTOM_P5_STROKE_WEIGHT] = (block) =>
 Blockly.Blocks[CUSTOM_P5_TURTLE_COORDINATE_SET] = {
   init() {
     this.setPreviousStatement(true, null);
-    this.appendDummyInput().appendField("ペンの位置を(");
+    this.appendDummyInput().appendField("ペンの位置を左から");
     this.appendValueInput("x").setCheck("Number");
-    this.appendDummyInput().appendField(",");
+    this.appendDummyInput().appendField("上から");
     this.appendValueInput("y").setCheck("Number");
-    this.appendDummyInput().appendField(")にセットする");
+    this.appendDummyInput().appendField("にする");
     this.setInputsInline(true);
     this.setNextStatement(true, null);
     this.setColour(330);
@@ -534,11 +534,11 @@ javascriptGenerator[CUSTOM_P5_LINE] = (block) =>
 Blockly.Blocks[CUSTOM_P5_LINE_REL] = {
   init() {
     this.setPreviousStatement(true, null);
-    this.appendDummyInput().appendField("直線: 長さ");
-    this.appendValueInput(CUSTOM_P5_NUMBER_REL).setCheck("Number");
     this.appendDummyInput().appendField("横軸に対して");
     this.appendValueInput(CUSTOM_P5_NUMBER_ARG).setCheck("Number");
-    this.appendDummyInput().appendField("度で進む");
+    this.appendDummyInput().appendField("度で距離");
+    this.appendValueInput(CUSTOM_P5_NUMBER_REL).setCheck("Number");
+    this.appendDummyInput().appendField("だけ進む");
     this.setInputsInline(true);
     this.setNextStatement(true, null);
     this.setColour(330);
