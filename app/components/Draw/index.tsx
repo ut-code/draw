@@ -534,7 +534,7 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
                 <Td>左から {getState().currentX.toPrecision(3)}</Td>
                 <Td>上から {getState().currentY.toPrecision(3)}</Td>
                 <Td>角度 {getState().angle}度</Td>
-                <Td> {getState().turtleReady ? "下":"上"}</Td>
+                <Td> {getState().turtleReady ? "下" : "上"}</Td>
               </Tr>
             </Tbody>
           </Table>
