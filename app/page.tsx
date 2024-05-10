@@ -55,7 +55,7 @@ export default async function Home() {
         <VStack justify={"center"} width="100%">
           <Logo />
           <Heading as="h1" size="4xl">
-            draw
+            CodeYourArt
           </Heading>
           <Text fontSize="lg">
             ブロックプログラミングであなただけの絵を描こう！

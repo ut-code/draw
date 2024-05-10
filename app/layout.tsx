@@ -6,7 +6,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "draw | ut.code();",
+  title: "CodeYourArt",
   description: "ブロックプログラミングであなただけの絵を描こう！",
 };
 

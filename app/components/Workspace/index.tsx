@@ -119,7 +119,7 @@ export default function Workspace(props: WorkspaceProps): JSX.Element {
         >
           <Logo />
           <Box display={{ base: "none", lg: "block" }} mx={2} fontSize="xl">
-            draw
+            CodeYourArt
           </Box>
           <Spacer />
 
