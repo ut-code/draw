@@ -559,17 +559,18 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
                 alt="pen"
                 style={{
                   position: "absolute",
-                  left:
-                    getState().currentX +
+                  left: `${getState().currentX}px`,
+                  top: `${getState().currentY - PEN_TOP_MARGIN}px`,
+                  transform: `translate(${
+                    PEN_IMAGE_WIDTH / 2 -
                     (PEN_IMAGE_WIDTH / 2) *
-                      Math.cos((getState().angle / 180) * Math.PI) -
-                    PEN_IMAGE_WIDTH / 2,
-                  top:
-                    getState().currentY -
-                    PEN_TOP_MARGIN +
+                      Math.cos((getState().angle / 180) * Math.PI)
+                  }px ,${
                     (PEN_IMAGE_WIDTH / 2) *
-                      Math.sin((getState().angle / 180) * Math.PI),
-                  transform: `rotate(${getState().angle}deg)`,
+                    Math.sin((getState().angle / 180) * Math.PI)
+                  }px)`,
+                  rotate: `${getState().angle}deg`,
+                  transition: "left 0.2s ease, top 0.2s ease",
                 }}
               />
             </Box>
