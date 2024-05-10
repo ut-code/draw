@@ -1,6 +1,14 @@
 import supabase from "./utils/supabase";
 import Image from "next/image";
-import { Box, Button, Grid, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import "./styles/style.css";
 import { Logo } from "./components/Logo";
 
@@ -52,9 +60,14 @@ export default async function Home() {
           <Text fontSize="lg">
             ブロックプログラミングであなただけの絵を描こう！
           </Text>
-          <Button as="a" href="/draw">
-            はじめる
-          </Button>
+          <Flex>
+            <Button mx={2} as="a" href="/tutorial/introduction">
+              基本操作からはじめる
+            </Button>
+            <Button mx={2} as="a" href="/draw">
+              自由制作からはじめる
+            </Button>
+          </Flex>
         </VStack>
       </Box>
       <Box className="slide-contents">
