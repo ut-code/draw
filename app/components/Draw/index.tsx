@@ -526,13 +526,15 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
         />
         <Grid templateColumns={"0.25fr 0.75fr"}>
           <Text fontSize="xl" mt={2} mr={2}>
-            ペンの位置
+            ペンの状態
           </Text>
           <Table>
             <Tbody>
               <Tr>
                 <Td>左から {getState().currentX.toPrecision(3)}</Td>
                 <Td>上から {getState().currentY.toPrecision(3)}</Td>
+                <Td>角度 {getState().angle}度</Td>
+                <Td> {getState().turtleReady ? "下":"上"}</Td>
               </Tr>
             </Tbody>
           </Table>
