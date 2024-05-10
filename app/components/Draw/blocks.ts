@@ -34,7 +34,7 @@ export const CUSTOM_P5_NUMBER_X4 = "custom_p5_number_x4";
 export const CUSTOM_P5_NUMBER_Y4 = "custom_p5_number_y4";
 export const CUSTOM_P5_SIN_NUMBER = "custom_p5_sin_number";
 export const CUSTOM_P5_COS_NUMBER = "custom_p5_cos_number";
-export const CUSTOM_P5_MUMBER_REL = "custom_p5_number_rel";
+export const CUSTOM_P5_NUMBER_REL = "custom_p5_number_rel";
 export const CUSTOM_P5_NUMBER_ARG = "custom_p5_number_arg";
 export const CUSTOM_P5_RANDOM_MIN = "custom_p5_random_min";
 export const CUSTOM_P5_RANDOM_MAX = "custom_p5_random_max";
@@ -535,7 +535,7 @@ Blockly.Blocks[CUSTOM_P5_LINE_REL] = {
   init() {
     this.setPreviousStatement(true, null);
     this.appendDummyInput().appendField("直線: 長さ");
-    this.appendValueInput(CUSTOM_P5_MUMBER_REL).setCheck("Number");
+    this.appendValueInput(CUSTOM_P5_NUMBER_REL).setCheck("Number");
     this.appendDummyInput().appendField("横軸に対して");
     this.appendValueInput(CUSTOM_P5_NUMBER_ARG).setCheck("Number");
     this.appendDummyInput().appendField("度で進む");
@@ -547,8 +547,8 @@ Blockly.Blocks[CUSTOM_P5_LINE_REL] = {
 };
 javascriptGenerator[CUSTOM_P5_LINE_REL] = (block) =>
   `${CUSTOM_P5_LINE_REL}(
-        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_MUMBER_REL, 0)},
-        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_NUMBER_ARG, 0)}
+        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_NUMBER_ARG, 0)},
+        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_NUMBER_REL, 0)}
         );`;
 
 Blockly.Blocks[CUSTOM_P5_SIN] = {
