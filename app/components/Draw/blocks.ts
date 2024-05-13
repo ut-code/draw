@@ -53,6 +53,22 @@ export const CUSTOM_P5_COLOR_PRESET = "custom_p5_color_preset";
 export const CUSTOM_P5_STROKE_COLOR_PRESET = "custom_p5_stroke_color_preset";
 export const CUSTOM_P5_ANGLE_CHANGE = "custom_p5_angle_change";
 export const CUSTOM_P5_GET_ANGLE = "custom_p5_get_angle";
+export const CUSTOM_P5_NO_FILL = "custom_p5_no_fill";
+
+Blockly.Blocks[CUSTOM_P5_NO_FILL] = {
+  init() {
+    this.appendDummyInput().appendField("塗りつぶさない");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+};
+javascriptGenerator[CUSTOM_P5_NO_FILL] = (block) =>
+  `${CUSTOM_P5_NO_FILL}(
+        );`;
 
 Blockly.Blocks[CUSTOM_P5_GET_ANGLE] = {
   init() {
