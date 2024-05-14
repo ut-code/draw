@@ -201,7 +201,9 @@ javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE] = (block) => [
 
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR] = {
   init: function () {
-    this.appendValueInput("r").setCheck(null).appendField("以下のペンの色をRGB値（");
+    this.appendValueInput("r")
+      .setCheck(null)
+      .appendField("以下のペンの色をRGB値（");
     this.appendValueInput("g").setCheck(null).appendField(",");
     this.appendValueInput("b").setCheck(null).appendField(",");
     this.appendDummyInput().appendField(")にする");
@@ -223,7 +225,9 @@ javascriptGenerator[CUSTOM_P5_STROKE_COLOR] = (block) =>
 Blockly.Blocks[CUSTOM_P5_STROKE_WEIGHT] = {
   init() {
     this.setPreviousStatement(true, null);
-    this.appendValueInput("weight").setCheck(null).appendField("以下のペンの太さを");
+    this.appendValueInput("weight")
+      .setCheck(null)
+      .appendField("以下のペンの太さを");
     this.appendDummyInput().appendField("にする");
     this.setColour(230);
     this.setInputsInline(true);
