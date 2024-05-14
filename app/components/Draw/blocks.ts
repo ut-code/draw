@@ -178,12 +178,12 @@ Blockly.Blocks[CUSTOM_P5_TURTLE_COORDINATE] = {
       .appendField("ペンの")
       .appendField(
         new Blockly.FieldDropdown([
-          ["x", "x"],
-          ["y", "y"],
+          ["左", "x"],
+          ["上", "y"],
         ]),
         "field",
       )
-      .appendField("座標");
+      .appendField("からの距離");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(230);
@@ -191,12 +191,15 @@ Blockly.Blocks[CUSTOM_P5_TURTLE_COORDINATE] = {
     this.setHelpUrl("");
   },
 };
-javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE] = (block) => [
-  `${CUSTOM_P5_TURTLE_COORDINATE}(
-        ${javascriptGenerator.statementToCode(block, "field")}
+javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE] = (block) => {
+  const dropdownValue = block.getFieldValue("field");
+  return [
+    `${CUSTOM_P5_TURTLE_COORDINATE}(
+        '${dropdownValue}'
         )`,
-  0,
-];
+    0,
+  ];
+};
 
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR] = {
   init: function () {
