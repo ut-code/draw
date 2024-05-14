@@ -93,7 +93,6 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
     {
       name: "ペンを使う",
       blockTypes: [
-        CUSTOM_P5_TURTLE_COORDINATE,
         CUSTOM_P5_TURTLE_COORDINATE_SET,
         CUSTOM_P5_LINE_REL,
         CUSTOM_P5_ANGLE_CHANGE,
@@ -101,6 +100,7 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         CUSTOM_P5_STROKE_COLOR,
         CUSTOM_P5_STROKE_COLOR_PRESET,
         CUSTOM_P5_ERASE_OR_NO_ERASE,
+        CUSTOM_P5_TURTLE_COORDINATE,
         CUSTOM_P5_GET_ANGLE,
       ],
     },
