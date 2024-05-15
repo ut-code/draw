@@ -111,7 +111,7 @@ javascriptGenerator[CUSTOM_P5_ANGLE_CHANGE] = (block) =>
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR_PRESET] = {
   init() {
     this.appendDummyInput()
-      .appendField("ペンの色を")
+      .appendField("以下のペンの色を")
       .appendField(
         new Blockly.FieldDropdown([
           ["赤", "赤"],
@@ -139,6 +139,7 @@ javascriptGenerator[CUSTOM_P5_STROKE_COLOR_PRESET] = (block) => {
 Blockly.Blocks[CUSTOM_P5_COLOR_PRESET] = {
   init() {
     this.appendDummyInput()
+      .appendField("以下の図形を")
       .appendField(
         new Blockly.FieldDropdown([
           ["赤", "赤"],
@@ -219,7 +220,9 @@ javascriptGenerator[CUSTOM_P5_TURTLE_COORDINATE] = (block) => {
 
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR] = {
   init: function () {
-    this.appendValueInput("r").setCheck(null).appendField("ペンの色を（");
+    this.appendValueInput("r")
+      .setCheck(null)
+      .appendField("以下のペンの色をRGB値（");
     this.appendValueInput("g").setCheck(null).appendField(",");
     this.appendValueInput("b").setCheck(null).appendField(",");
     this.appendDummyInput().appendField(")にする");
@@ -241,7 +244,9 @@ javascriptGenerator[CUSTOM_P5_STROKE_COLOR] = (block) =>
 Blockly.Blocks[CUSTOM_P5_STROKE_WEIGHT] = {
   init() {
     this.setPreviousStatement(true, null);
-    this.appendValueInput("weight").setCheck(null).appendField("ペンの太さを");
+    this.appendValueInput("weight")
+      .setCheck(null)
+      .appendField("以下のペンの太さを");
     this.appendDummyInput().appendField("にする");
     this.setColour(230);
     this.setInputsInline(true);
@@ -279,12 +284,12 @@ Blockly.Blocks[CUSTOM_P5_COLOR] = {
   init() {
     this.appendValueInput(CUSTOM_P5_COLOR_RED)
       .setCheck(null)
-      .appendField("RGB(");
+      .appendField("以下の図形をRGB値(");
     this.appendValueInput(CUSTOM_P5_COLOR_GREEN)
       .setCheck(null)
       .appendField(",");
     this.appendValueInput(CUSTOM_P5_COLOR_BLUE).setCheck(null).appendField(",");
-    this.appendDummyInput().appendField(")");
+    this.appendDummyInput().appendField(")で塗りつぶす");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

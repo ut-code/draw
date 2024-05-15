@@ -150,6 +150,9 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
   function init(): P5WorkspaceState {
     const draw = (p5: p5Types) => {
       p5.background(255);
+      p5.stroke(0, 0, 0);
+      p5.strokeWeight(1);
+      p5.fill(255, 255, 255);
     };
     return {
       draw,
