@@ -4,7 +4,7 @@ import {
   Flex,
   chakra,
   Icon,
-  Link,
+  Link as ChakraLink,
   Spacer,
   Text,
   Button,
@@ -17,6 +17,7 @@ import { SaveModal } from "../SaveModal";
 import { v4 as uuidv4 } from "uuid";
 import supabase from "../../utils/supabase";
 import { SaveCompletedModal } from "../SaveCompletedModal";
+import Link from 'next/link'
 
 type WorkspaceProps = {
   isTutorial: boolean;
@@ -119,7 +120,7 @@ export default function Workspace(props: WorkspaceProps): JSX.Element {
         >
           <Logo />
           <Box display={{ base: "none", lg: "block" }} mx={2} fontSize="xl">
-            CodeYourArt
+            <Link href="/">CodeYourArt</Link>
           </Box>
           <Spacer />
 
@@ -173,7 +174,7 @@ export default function Workspace(props: WorkspaceProps): JSX.Element {
                 </Button>
               </>
             )}
-            <Link
+            <ChakraLink
               display="flex"
               alignItems="center"
               transition="color 0.2s"
@@ -184,7 +185,7 @@ export default function Workspace(props: WorkspaceProps): JSX.Element {
               href="https://github.com/ut-code/draw"
             >
               <Icon w={6} h={6} as={RiGithubFill} />
-            </Link>
+            </ChakraLink>
           </Box>
         </Flex>
         <Box position="relative" flexGrow={1}>
