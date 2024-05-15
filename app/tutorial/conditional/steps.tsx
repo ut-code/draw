@@ -2,48 +2,45 @@ import { AspectRatio, Box, Grid, Image, Text } from "@chakra-ui/react";
 
 export const tutorialSteps = [
   {
-    title: "基本操作",
-    content: (
-      <>
-        <Text mb={3}>下の動画を見て、基本操作を学習できます。</Text>
-        <AspectRatio ratio={16 / 9}>
-          <iframe
-            title="unique"
-            src="https://www.youtube-nocookie.com/embed/iQXYZJ3R8pg"
-            allow="autoplay; picture-in-picture"
-            allowFullScreen
-          />
-        </AspectRatio>
-      </>
-    ),
-  },
-  {
-    title: "drawについて",
+    title: "条件分岐とは",
     content: (
       <>
         <Text my={2}>
-          drawは、スクラッチのように簡単なプログラミングで色々な図形を書いてみようという企画です。
+          条件分岐とは、プログラムが特定の条件に基づいて異なる処理を行う仕組みのことです。簡単に言うと、「もし〜ならば、〜する」というような判断をプログラム内で行う方法です。
         </Text>
+        <Text my={2}>
+          以下の例は、サイコロをふって出た目が3以下のときに、横軸に対して45度で100進むプログラムとなります。
+        </Text>
+        <Image src="/conditional_1.png" alt="条件分岐の例"></Image>
       </>
     ),
   },
   {
-    title: "簡単な図形を書いてみよう",
+    title: "条件にあてはまらない場合",
     content: (
       <>
-        <Text my={2}>まずは簡単な図形を書いてみましょう。</Text>
+        <Text my={2}>
+          条件分岐では、条件にあてはまる際の処理と、そうでない場合の処理をまとめて書くことができます。「もし〜ならば〜、違えば～」のブロックを使用します。
+        </Text>
+        <Text my={2}>
+          以下の例は、サイコロをふって出た目が3以下のときに、横軸に対して45度で100進み、そうでないとき、つまりサイコロをふって出た目が3以上のときに、横軸に対して-45度で100進むプログラムとなります。
+        </Text>
+        <Image src="/conditional_2.png" alt="条件分岐の例"></Image>
       </>
     ),
   },
   {
-    title: "ループ文を使ってみよう",
+    title: "使ってみよう",
     content: (
-      <Grid templateColumns="4fr 3fr" gap={3}>
-        <Box>
-          <Text my={2}>ループ文を使ってみましょう。</Text>
-        </Box>
-        <Image src="sample.png" alt="サンプル画像" />
-      </Grid>
+      <>
+        <Text my={2}>
+          条件分岐を使って、ランダムに角度を変えながらペンを移動させてみましょう。
+        </Text>
+        <Text my={2}>
+          以下のように、
+        </Text>
+        <Image src="/conditional_2.png" alt="条件分岐の例"></Image>
+      </>
     ),
   },
 ];
