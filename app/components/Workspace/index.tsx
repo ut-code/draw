@@ -133,9 +133,10 @@ export default function Workspace(props: WorkspaceProps): JSX.Element {
                     as="a"
                     href={`/tutorial/${prevTutorial.link}`}
                     colorScheme="blue"
+                    variant="outline"
                     my="auto"
                   >
-                    前へ: {prevTutorial.title}
+                    前のチュートリアルへ
                   </Button>
                 )}
                 <Box textAlign="center" mx={2}>
@@ -149,19 +150,25 @@ export default function Workspace(props: WorkspaceProps): JSX.Element {
                     as="a"
                     href={`/tutorial/${nextTutorial.link}`}
                     colorScheme="blue"
+                    variant="outline"
                     my="auto"
                   >
-                    次へ: {nextTutorial.title}
+                    次のチュートリアルへ
                   </Button>
                 ) : (
-                  <Button as="a" href="/draw" colorScheme="blue" my="auto">
+                  <Button
+                    as="a"
+                    href="/draw"
+                    colorScheme="blue"
+                    variant="outline"
+                    my="auto"
+                  >
                     自由制作へ
                   </Button>
                 )}
                 <Button
                   mx={2}
                   my="auto"
-                  variant="outline"
                   colorScheme="blue"
                   type="button"
                   transition="color 0.2s"
