@@ -7,6 +7,7 @@ import {
   Grid,
   Heading,
   Text,
+  Tooltip,
   VStack,
 } from "@chakra-ui/react";
 import "./styles/style.css";
@@ -61,12 +62,16 @@ export default async function Home() {
             ブロックプログラミングであなただけの絵を描こう！
           </Text>
           <Flex>
-            <Button mx={2} as="a" href="/tutorial/introduction">
-              基本操作からはじめる
-            </Button>
-            <Button mx={2} as="a" href="/draw">
-              自由制作からはじめる
-            </Button>
+            <Tooltip label="基本操作とプログラミングの基礎を学ぶ">
+              <Button mx={2} as="a" href="/tutorial/introduction">
+                基本操作からはじめる
+              </Button>
+            </Tooltip>
+            <Tooltip label="さっそく作る">
+              <Button mx={2} as="a" href="/draw">
+                自由制作からはじめる
+              </Button>
+            </Tooltip>
           </Flex>
         </VStack>
       </Box>
