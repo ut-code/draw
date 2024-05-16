@@ -1,8 +1,4 @@
-import {
-  Image,
-  Text,
-
-} from "@chakra-ui/react";
+import { Image, Text } from "@chakra-ui/react";
 
 export const tutorialSteps = [
   {
@@ -20,7 +16,7 @@ export const tutorialSteps = [
     content: (
       <>
         <Text my={2}>
-          ペンと繰り返し文を組み合わせると以下のように正多角形を描くことができます。ただ、ペンが回転する角度を360の約数にしないと、繰り返しによってペンの角度が360度にならず無限ループとなってしまいます。無限ループにならないよう条件を確認しましょう。
+          ペンと繰り返し文を組み合わせると以下のように正多角形を描くことができます。
         </Text>
         <Image src="/loop_1.png" alt="正12角形"></Image>
       </>
@@ -31,7 +27,7 @@ export const tutorialSteps = [
     content: (
       <>
         <Text my={2}>
-          変数と繰り返し文を組み合わせると以下のようなグラデーションを作ることができます。この場合も、繰り返しによってx = 300になり、無限ループにならないことを確認しましょう。
+          変数と繰り返し文を組み合わせると以下のようなグラデーションを作ることができます。
         </Text>
         <Image src="/loop_2.png" alt="グラデーション"></Image>
       </>
