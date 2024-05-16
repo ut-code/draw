@@ -17,7 +17,7 @@ import { SaveModal } from "../SaveModal";
 import { v4 as uuidv4 } from "uuid";
 import supabase from "../../utils/supabase";
 import { SaveCompletedModal } from "../SaveCompletedModal";
-import Link from 'next/link'
+import Link from "next/link";
 
 type WorkspaceProps = {
   isTutorial: boolean;
