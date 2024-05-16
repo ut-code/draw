@@ -10,6 +10,8 @@ import {
   Table,
   Text,
   chakra,
+  Switch,
+  FormLabel,
 } from "@chakra-ui/react";
 import { useGetSet } from "react-use";
 import p5Types from "p5";
@@ -515,6 +517,8 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
     onStep: highlightBlock,
   });
 
+  const [showingPenImage, setShowingPenImage] = useState(true);
+
   return (
     <Grid h="100%" templateColumns="1fr 0.75fr">
       <div ref={workspaceAreaRef} />
@@ -573,33 +577,43 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
                 draw={getState().draw}
                 windowResized={windowResized}
               />
-              <Image
-                src="/pen.svg"
-                width={PEN_IMAGE_WIDTH}
-                height={PEN_IMAGE_HEIGHT}
-                alt="pen"
-                style={{
-                  position: "absolute",
-                  left: `${getState().currentX}px`,
-                  top: `${getState().currentY - PEN_TOP_MARGIN}px`,
-                  transform: `translate(${
-                    PEN_IMAGE_WIDTH / 2 -
-                    (PEN_IMAGE_WIDTH / 2) *
-                      Math.cos((getState().angle / 180) * Math.PI)
-                  }px ,${
-                    (PEN_IMAGE_WIDTH / 2) *
-                    Math.sin((getState().angle / 180) * Math.PI)
-                  }px)`,
-                  rotate: `${getState().angle}deg`,
-                  transition: "left 0.2s ease, top 0.2s ease",
-                }}
-              />
+              {showingPenImage && (
+                <Image
+                  src="/pen.svg"
+                  width={PEN_IMAGE_WIDTH}
+                  height={PEN_IMAGE_HEIGHT}
+                  alt="pen"
+                  style={{
+                    position: "absolute",
+                    left: `${getState().currentX}px`,
+                    top: `${getState().currentY - PEN_TOP_MARGIN}px`,
+                    transform: `translate(${
+                      PEN_IMAGE_WIDTH / 2 -
+                      (PEN_IMAGE_WIDTH / 2) *
+                        Math.cos((getState().angle / 180) * Math.PI)
+                    }px ,${
+                      (PEN_IMAGE_WIDTH / 2) *
+                      Math.sin((getState().angle / 180) * Math.PI)
+                    }px)`,
+                    rotate: `${getState().angle}deg`,
+                    transition: "left 0.2s ease, top 0.2s ease",
+                  }}
+                />
+              )}
             </Box>
           </Box>
         </Flex>
         <Button onClick={() => props.setIsSaveModalOpen(true)} py={2}>
           保存
         </Button>
+        <Flex>
+          <Switch
+            type="checkbox"
+            isChecked={showingPenImage}
+            onChange={(e) => setShowingPenImage(e.target.checked)}
+          />
+          <FormLabel ml={2}>ペンの位置を表示する</FormLabel>
+        </Flex>
       </Stack>
     </Grid>
   );
