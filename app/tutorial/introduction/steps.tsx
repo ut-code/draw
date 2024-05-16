@@ -1,49 +1,69 @@
-import { AspectRatio, Box, Grid, Image, Text } from "@chakra-ui/react";
+import {
+  Image,
+  Text,
+} from "@chakra-ui/react";
 
 export const tutorialSteps = [
   {
-    title: "基本操作",
-    content: (
-      <>
-        <Text mb={3}>下の動画を見て、基本操作を学習できます。</Text>
-        <AspectRatio ratio={16 / 9}>
-          <iframe
-            title="unique"
-            src="https://www.youtube-nocookie.com/embed/iQXYZJ3R8pg"
-            allow="autoplay; picture-in-picture"
-            allowFullScreen
-          />
-        </AspectRatio>
-      </>
-    ),
-  },
-  {
-    title: "drawについて",
+    title: "CodeYourArtについて",
     content: (
       <>
         <Text my={2}>
-          drawは、スクラッチのように簡単なプログラミングで色々な図形を書いてみようという企画です。
+          CodeYourArtは、ブロックプログラミングで絵を描くことを通じてプログラミングの基本に親しんでもらおうという企画です。
+        </Text>
+        <Text my={2}>
+          絵を描く方法は大きく二つに分けられて、ペンを使う方法と座標を使う方法です。
         </Text>
       </>
     ),
   },
   {
-    title: "簡単な図形を書いてみよう",
+    title: "ペンを使おう",
     content: (
       <>
-        <Text my={2}>まずは簡単な図形を書いてみましょう。</Text>
+        <Text my={2}>
+          まずはペンを使ってみましょう。
+        </Text>
+        <Text my={2}>
+          画面左にある「ペンを使う」をクリックして、必要なブロックを持ってきます。数字のブロックは「基本」の中に入っています。
+        </Text>
+        <Image src="/introduction_1.png" alt="ペンを使って直線を描く方法"></Image>
       </>
     ),
   },
   {
-    title: "ループ文を使ってみよう",
+    title: "座標を使おう",
     content: (
-      <Grid templateColumns="4fr 3fr" gap={3}>
-        <Box>
-          <Text my={2}>ループ文を使ってみましょう。</Text>
-        </Box>
-        <Image src="sample.png" alt="サンプル画像" />
-      </Grid>
+      <>
+        <Text my={2}>
+          次に座標を使って簡単な図形を書いてみましょう。
+        </Text>
+        <Text my={2}>
+          画面左にある「座標を使う」をクリックして、必要なブロックを持ってきます。「以下の図形を赤で塗りつぶす」ブロックを「円」ブロックの上につなげることで円が赤で塗りつぶされます。
+        </Text>
+        <Image src="/introduction_2.png" alt="赤で塗りつぶした円"></Image>
+      </>
+    ),
+  },
+  {
+    title: "変数を使おう",
+    content: (
+      <>
+        <Text my={2}>
+          次に変数を使ってみましょう。変数とは、「値を一時的に保存しておくための入れ物」です。
+        </Text>
+        <Text my={2}>
+          以下の例では、xとyという変数に100という値を保存し、円の中心の座標として使っています。
+        </Text>
+        <Image src="/introduction_3.png" alt="座標を指定した円"></Image>
+        <Text my={2}>
+          以下の例では、RGB値を変数で指定しています。RGBとは、「赤（Red）」「緑（Green）」「青（Blue）」の略で、それぞれに0~255の値を指定することで様々な色を表現できます。例えば、(0,0,0)なら黒、(255,255,255)なら白です。
+        </Text>
+        <Image src="/introduction_4.png" alt="RGB値を指定した円"></Image>
+        <Text my={2}>
+          RGBを用いて様々な色の図形を作ってみましょう。
+        </Text>
+      </>
     ),
   },
 ];

@@ -1,49 +1,51 @@
-import { AspectRatio, Box, Grid, Image, Text } from "@chakra-ui/react";
+import {
+  Image,
+  Text,
+
+} from "@chakra-ui/react";
 
 export const tutorialSteps = [
   {
-    title: "基本操作",
-    content: (
-      <>
-        <Text mb={3}>下の動画を見て、基本操作を学習できます。</Text>
-        <AspectRatio ratio={16 / 9}>
-          <iframe
-            title="unique"
-            src="https://www.youtube-nocookie.com/embed/iQXYZJ3R8pg"
-            allow="autoplay; picture-in-picture"
-            allowFullScreen
-          />
-        </AspectRatio>
-      </>
-    ),
-  },
-  {
-    title: "drawについて",
+    title: "繰り返し文を使ってみよう",
     content: (
       <>
         <Text my={2}>
-          drawは、スクラッチのように簡単なプログラミングで色々な図形を書いてみようという企画です。
+          繰り返し文を用いると、ある条件が満たされている間実行され続けるプログラムを記述することができます。
         </Text>
       </>
     ),
   },
   {
-    title: "簡単な図形を書いてみよう",
+    title: "正多角形を書こう",
     content: (
       <>
-        <Text my={2}>まずは簡単な図形を書いてみましょう。</Text>
+        <Text my={2}>
+          ペンと繰り返し文を組み合わせると以下のように正多角形を描くことができます。ただ、ペンが回転する角度を360の約数にしないと、繰り返しによってペンの角度が360度にならず無限ループとなってしまいます。無限ループにならないよう条件を確認しましょう。
+        </Text>
+        <Image src="/loop_1.png" alt="正12角形"></Image>
       </>
     ),
   },
   {
-    title: "ループ文を使ってみよう",
+    title: "グラデーションを作ろう",
     content: (
-      <Grid templateColumns="4fr 3fr" gap={3}>
-        <Box>
-          <Text my={2}>ループ文を使ってみましょう。</Text>
-        </Box>
-        <Image src="sample.png" alt="サンプル画像" />
-      </Grid>
+      <>
+        <Text my={2}>
+          変数と繰り返し文を組み合わせると以下のようなグラデーションを作ることができます。この場合も、繰り返しによってx = 300になり、無限ループにならないことを確認しましょう。
+        </Text>
+        <Image src="/loop_2.png" alt="グラデーション"></Image>
+      </>
+    ),
+  },
+  {
+    title: "乱数を使おう",
+    content: (
+      <>
+        <Text my={2}>
+          また、画面左の「基本」にある乱数ブロックを使うと以下のような模様を描くことができます。繰り返し文を使って様々な図形を書いてみましょう。
+        </Text>
+        <Image src="/loop_3.png" alt="乱数を使った図形"></Image>
+      </>
     ),
   },
 ];
