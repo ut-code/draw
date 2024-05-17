@@ -69,7 +69,7 @@ export const tutorialSteps = [
           0, 0)なら黒、(47, 153, 142)なら緑と青の中間、(255, 255,
           255)なら白です。インターネットで検索すると、RGB値と実際の色の対応関係がわかります。
         </Text>
-        <Image src="/introduction_4.png" alt="RGB値を指定した円"/>
+        <Image src="/introduction_4.png" alt="RGB値を指定した円" />
         <Text my={2}>変数やRGB値を用いて様々な図形を作ってみましょう。</Text>
       </>
     ),

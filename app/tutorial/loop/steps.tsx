@@ -30,8 +30,12 @@ export const tutorialSteps = [
         <Text my={2}>
           以下の画像のように、繰り返しを用いて色々な図形を描くプログラムをつくってみましょう。
         </Text>
-        <Image src="/loop_4.png" w="30%" m="auto" alt="繰り返しを用いた色々な図形" />
-
+        <Image
+          src="/loop_4.png"
+          w="30%"
+          m="auto"
+          alt="繰り返しを用いた色々な図形"
+        />
       </>
     ),
   },
