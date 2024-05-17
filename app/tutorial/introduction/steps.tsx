@@ -29,9 +29,12 @@ export const tutorialSteps = [
           また、ペンを使うときの角度は横軸に対する角度から指定する方法と今向いている方向から指定する方法があります。どちらも時計回りが正の向きです。
         </Text>
         <Image
-          src="/introduction_1.png"
-          alt="ペンを使って直線を描く方法"
-        ></Image>
+          src="/introduction_5.svg"
+          alt="角度指定の方法"
+          w="50%"
+          m="auto"
+        />
+        <Image src="/introduction_1.png" alt="ペンを使って直線を描く方法" />
       </>
     ),
   },
@@ -43,7 +46,7 @@ export const tutorialSteps = [
         <Text my={2}>
           画面左にある「座標を使う」をクリックして、必要なブロックを持ってきます。「以下の図形を赤で塗りつぶす」ブロックを「円」ブロックの上につなげることで円が赤で塗りつぶされます。
         </Text>
-        <Image src="/introduction_2.png" alt="赤で塗りつぶした円"></Image>
+        <Image src="/introduction_2.png" alt="赤で塗りつぶした円" />
       </>
     ),
   },
@@ -57,13 +60,13 @@ export const tutorialSteps = [
         <Text my={2}>
           以下の例では、xとyという変数に300という値を保存し、円の中心の座標として使っています。
         </Text>
-        <Image src="/introduction_3.png" alt="座標を指定した円"></Image>
+        <Image src="/introduction_3.png" alt="座標を指定した円" />
         <Text my={2}>
           以下の例では、RGB値を変数で指定しています。RGBとは、「赤（Red）」「緑（Green）」「青（Blue）」の略で、それぞれに0~255の値を指定することで様々な色を表現できます。例えば、(0,0,0)なら黒、(255,255,255)なら白です。
         </Text>
         <Image src="/introduction_4.png" alt="RGB値を指定した円"></Image>
         <Text my={2}>
-          変数とRGB値を用いて様々な色の図形を作ってみましょう。
+          RGBを用いて様々な色の図形を作ってみましょう。
         </Text>
       </>
     ),
