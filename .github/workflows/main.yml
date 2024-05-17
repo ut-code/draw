@@ -1,7 +1,7 @@
 name: Keep-Alive Workflow
 on:
   schedule:
-    - cron: '*/13 * * * *'
+    - cron: '*/10 * * * *'
 
 jobs:
   keep_alive:
