@@ -66,7 +66,7 @@ export const tutorialSteps = [
         </Text>
         <Image src="/introduction_4.png" alt="RGB値を指定した円"></Image>
         <Text my={2}>
-          RGBを用いて様々な色の図形を作ってみましょう。
+          変数とRGB値を用いて様々な色の図形を作ってみましょう。
         </Text>
       </>
     ),
