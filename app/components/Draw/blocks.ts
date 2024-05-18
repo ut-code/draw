@@ -13,6 +13,7 @@ export const CUSTOM_P5_RECT = "rect";
 export const CUSTOM_P5_TRIANGLE = "triangle";
 export const CUSTOM_P5_LINE = "line";
 export const CUSTOM_P5_LINE_REL = "line_rel";
+export const CUSTOM_P5_LINE_REL_ = "line_rel_";
 export const CUSTOM_P5_SIN = "sin";
 export const CUSTOM_P5_COS = "cos";
 export const CUSTOM_P5_RANDOM = "random";
@@ -52,6 +53,8 @@ export const CUSTOM_P5_ERASE_OR_NO_ERASE = "custom_p5_erase_or_no_erase";
 export const CUSTOM_P5_COLOR_PRESET = "custom_p5_color_preset";
 export const CUSTOM_P5_STROKE_COLOR_PRESET = "custom_p5_stroke_color_preset";
 export const CUSTOM_P5_ANGLE_CHANGE = "custom_p5_angle_change";
+export const CUSTOM_P5_ANGLE_CHANGE_ = "custom_p5_angle_change_";
+export const CUSTOM_P5_ANGLE_CHANGE_REL = "custom_p5_angle_change_rel";
 export const CUSTOM_P5_GET_ANGLE = "custom_p5_get_angle";
 export const CUSTOM_P5_NO_FILL = "custom_p5_no_fill";
 
@@ -106,6 +109,25 @@ javascriptGenerator[CUSTOM_P5_ANGLE_CHANGE] = (block) =>
   `${CUSTOM_P5_ANGLE_CHANGE}(
         ${javascriptGenerator.valueToCode(block, "angle", 0)},
         ${javascriptGenerator.valueToCode(block, "length", 0)}
+        );`;
+
+Blockly.Blocks[CUSTOM_P5_ANGLE_CHANGE_REL] = {
+  init() {
+    this.appendValueInput("angle")
+      .setCheck(null)
+      .appendField("今向いている方向から時計回りに");
+    this.appendDummyInput().appendField("度回転する");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  },
+};
+javascriptGenerator[CUSTOM_P5_ANGLE_CHANGE_REL] = (block) =>
+  `${CUSTOM_P5_ANGLE_CHANGE_REL}(
+        ${javascriptGenerator.valueToCode(block, "angle", 0)}
         );`;
 
 Blockly.Blocks[CUSTOM_P5_STROKE_COLOR_PRESET] = {
@@ -574,6 +596,40 @@ Blockly.Blocks[CUSTOM_P5_LINE_REL] = {
 javascriptGenerator[CUSTOM_P5_LINE_REL] = (block) =>
   `${CUSTOM_P5_LINE_REL}(
         ${javascriptGenerator.valueToCode(block, CUSTOM_P5_NUMBER_ARG, 0)},
+        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_NUMBER_REL, 0)}
+        );`;
+
+Blockly.Blocks[CUSTOM_P5_ANGLE_CHANGE_] = {
+  init() {
+    this.setPreviousStatement(true, null);
+    this.appendDummyInput().appendField("ペンの向きを横軸に対して");
+    this.appendValueInput(CUSTOM_P5_NUMBER_ARG).setCheck("Number");
+    this.appendDummyInput().appendField("度にする");
+    this.setInputsInline(true);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+    this.setTooltip("");
+  },
+};
+javascriptGenerator[CUSTOM_P5_ANGLE_CHANGE_] = (block) =>
+  `${CUSTOM_P5_ANGLE_CHANGE_}(
+        ${javascriptGenerator.valueToCode(block, CUSTOM_P5_NUMBER_ARG, 0)}
+        );`;
+
+Blockly.Blocks[CUSTOM_P5_LINE_REL_] = {
+  init() {
+    this.setPreviousStatement(true, null);
+    this.appendDummyInput().appendField("距離");
+    this.appendValueInput(CUSTOM_P5_NUMBER_REL).setCheck("Number");
+    this.appendDummyInput().appendField("進む");
+    this.setInputsInline(true);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+    this.setTooltip("");
+  },
+};
+javascriptGenerator[CUSTOM_P5_LINE_REL_] = (block) =>
+  `${CUSTOM_P5_LINE_REL_}(
         ${javascriptGenerator.valueToCode(block, CUSTOM_P5_NUMBER_REL, 0)}
         );`;
 

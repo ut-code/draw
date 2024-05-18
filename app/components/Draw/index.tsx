@@ -59,6 +59,9 @@ import {
   CUSTOM_P5_ANGLE_CHANGE,
   CUSTOM_P5_GET_ANGLE,
   CUSTOM_P5_NO_FILL,
+  CUSTOM_P5_ANGLE_CHANGE_REL,
+  CUSTOM_P5_ANGLE_CHANGE_,
+  CUSTOM_P5_LINE_REL_,
 } from "./blocks";
 import { ExecutionManager } from "../../components/ExecutionManager";
 import VariableList from "../../components/VariableList";
@@ -99,6 +102,9 @@ const toolboxDefinition: BlocklyToolboxDefinition = {
         CUSTOM_P5_TURTLE_COORDINATE_SET,
         CUSTOM_P5_LINE_REL,
         CUSTOM_P5_ANGLE_CHANGE,
+        CUSTOM_P5_LINE_REL_,
+        CUSTOM_P5_ANGLE_CHANGE_REL,
+        CUSTOM_P5_ANGLE_CHANGE_,
         CUSTOM_P5_STROKE_WEIGHT,
         CUSTOM_P5_STROKE_COLOR,
         CUSTOM_P5_STROKE_COLOR_PRESET,
@@ -216,6 +222,24 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
         });
       }
     },
+    [CUSTOM_P5_ANGLE_CHANGE_]: (arg: number) => {
+      checkUndefined(arg);
+      const currentStateStart = getState();
+      setState({
+        ...currentStateStart,
+        angle: arg,
+      });
+    },
+    [CUSTOM_P5_ANGLE_CHANGE_REL]: (arg: number) => {
+      checkUndefined(arg);
+      const currentStateStart = getState();
+      const arg1 = currentStateStart.angle;
+      const arg2 = arg1 + arg;
+      setState({
+        ...currentStateStart,
+        angle: arg2,
+      });
+    },
     [CUSTOM_P5_ERASE_OR_NO_ERASE]: (str: string) => {
       const currentStateStart = getState();
       const ready = str === "下げる";
@@ -225,6 +249,36 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
       checkUndefined(len);
       checkUndefined(arg);
       const currentStateStart = getState();
+      const x1 = currentStateStart.currentX;
+      const y1 = currentStateStart.currentY;
+      const x2 = x1 + len * Math.cos((arg / 180) * Math.PI);
+      const y2 = y1 + len * Math.sin((arg / 180) * Math.PI);
+      const ready = currentStateStart.turtleReady;
+      const draw: (p5: p5Types) => void = (p5) => {
+        currentStateStart.draw(p5);
+        p5.line(x1, y1, x2, y2);
+      };
+      if (ready === true) {
+        setState({
+          ...currentStateStart,
+          draw,
+          currentX: x2,
+          currentY: y2,
+          angle: arg,
+        });
+      } else {
+        setState({
+          ...currentStateStart,
+          currentX: x2,
+          currentY: y2,
+          angle: arg,
+        });
+      }
+    },
+    [CUSTOM_P5_LINE_REL_]: (len: number) => {
+      checkUndefined(len);
+      const currentStateStart = getState();
+      const arg = currentStateStart.angle;
       const x1 = currentStateStart.currentX;
       const y1 = currentStateStart.currentY;
       const x2 = x1 + len * Math.cos((arg / 180) * Math.PI);
