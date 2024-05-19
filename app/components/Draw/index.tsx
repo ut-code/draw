@@ -657,7 +657,11 @@ export function DrawWorkspace(props: drawWorkspaceInput): JSX.Element {
             </Box>
           </Box>
         </Flex>
-        <Button colorScheme="blue" onClick={() => props.setIsSaveModalOpen(true)} py={2}>
+        <Button
+          colorScheme="blue"
+          onClick={() => props.setIsSaveModalOpen(true)}
+          py={2}
+        >
           保存
         </Button>
         <Flex>

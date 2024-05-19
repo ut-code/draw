@@ -80,6 +80,26 @@ export const tutorialSteps = [
           autoPlay
           loop
         />
+        <Text my={2}>
+          右下の「はじめる」を押して開始しましょう。このスライドは右上の{" "}
+          <Image
+            src="/check_slide.png"
+            alt="スライドを確認する"
+            display="inline"
+            width="10%"
+          />
+          を押すともう一度みることができます。
+        </Text>
+        <Text my={2}>
+          確認ができたら右上の
+          <Image
+            src="/next_tutorial.png"
+            alt="次のチュートリアルへ"
+            display="inline"
+            width="15%"
+          />
+          をクリックして、次のチュートリアルへ進みましょう。
+        </Text>
       </>
     ),
   },

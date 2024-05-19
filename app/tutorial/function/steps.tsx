@@ -73,4 +73,32 @@ export const tutorialSteps = [
       </>
     ),
   },
+  {
+    title: "確認しよう",
+    content: (
+      <>
+        <Text my={2}>今まで学んだ、関数を実際に確認してみましょう。</Text>
+        <Text my={2}>
+          右下の「はじめる」を押して開始しましょう。このスライドは右上の{" "}
+          <Image
+            src="/check_slide.png"
+            alt="スライドを確認する"
+            display="inline"
+            width="10%"
+          />
+          を押すともう一度みることができます。
+        </Text>
+        <Text my={2}>
+          おめでとうございます！これでチュートリアルは最後なので、確認ができたら右上の
+          <Image
+            src="/free_draw.png"
+            alt="自由制作へ"
+            display="inline"
+            width="10%"
+          />
+          をクリックして、自由制作へ進みましょう。
+        </Text>
+      </>
+    ),
+  },
 ];

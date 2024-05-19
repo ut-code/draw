@@ -8,9 +8,8 @@ export const tutorialSteps = [
         <Text my={2}>
           CodeYourArtは、ブロックプログラミングで絵を描くことを通じて、創作をしながらプログラムの基本構造を体験いただく企画です。
         </Text>
-        <Text my={2}>
-          絵を描く方法には、ペンを使う方法と座標を使う方法があります。座標は左上を基準として数え、右下に向かうにつれて大きくなります。
-        </Text>
+        <Text my={2}>基本的な画面の操作説明は以下のとおりです。</Text>
+        <Image src="/introduction_6.png" alt="基本操作の方法" m="auto" />
       </>
     ),
   },
@@ -18,7 +17,10 @@ export const tutorialSteps = [
     title: "ペンを使おう",
     content: (
       <>
-        <Text my={2}>まずはペンを使ってみましょう。</Text>
+        <Text my={2}>
+          絵を描く方法には、ペンを使う方法と座標を使う方法があります。
+        </Text>
+        <Text my={2}>まずはペンを使って絵を描いてみましょう。</Text>
         <Text my={2}>
           画面左にある「ペンを使う」をクリックして、必要なブロックを持ってきます。数字のブロックは「基本」の中に入っています。
         </Text>
@@ -42,7 +44,9 @@ export const tutorialSteps = [
     title: "座標を使おう",
     content: (
       <>
-        <Text my={2}>次に座標を使って簡単な図形を書いてみましょう。</Text>
+        <Text my={2}>
+          次に座標を使って簡単な図形を書いてみましょう。座標は左上を基準として数え、右下に向かうにつれて大きくなります。
+        </Text>
         <Text my={2}>
           画面左にある「座標を使う」をクリックして、必要なブロックを持ってきます。「以下の図形を赤で塗りつぶす」ブロックを「円」ブロックの上につなげることで円が赤で塗りつぶされます。
         </Text>
@@ -71,6 +75,36 @@ export const tutorialSteps = [
         </Text>
         <Image src="/introduction_4.png" alt="RGB値を指定した円" />
         <Text my={2}>変数やRGB値を用いて様々な図形を作ってみましょう。</Text>
+      </>
+    ),
+  },
+  {
+    title: "確認しよう",
+    content: (
+      <>
+        <Text my={2}>
+          今まで学んだ、ペンを用いた描画、座標を用いた描画、変数を実際に確認してみましょう。
+        </Text>
+        <Text my={2}>
+          右下の「はじめる」を押して開始しましょう。このスライドは右上の{" "}
+          <Image
+            src="/check_slide.png"
+            alt="スライドを確認する"
+            display="inline"
+            width="10%"
+          />
+          を押すともう一度みることができます。
+        </Text>
+        <Text my={2}>
+          確認ができたら右上の
+          <Image
+            src="/next_tutorial.png"
+            alt="次のチュートリアルへ"
+            display="inline"
+            width="15%"
+          />
+          をクリックして、次のチュートリアルへ進みましょう。
+        </Text>
       </>
     ),
   },
